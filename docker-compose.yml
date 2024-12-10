@@ -1,0 +1,17 @@
+
+services:
+  postgres:
+    image: postgres:15.10
+    container_name: bookswap
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: admin123
+      POSTGRES_DB: hey-books
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/c/Program Files/PostgreSQL/15
+
+
+volumes:
+  postgres_data:
