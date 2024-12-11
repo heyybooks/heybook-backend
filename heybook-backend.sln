@@ -15,49 +15,49 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "modules", "modules", "{DB22
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Books", "Books", "{BBBE13B1-7207-470D-956B-006D23431382}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Books.Business", "src\modules\Books\Books.Business\Books.Business.csproj", "{381C9CE2-3F6F-4C13-A3EC-FF59054C089B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Books.Business", "src\modules\Books\Books.Business\Books.Business.csproj", "{381C9CE2-3F6F-4C13-A3EC-FF59054C089B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Books.DataAccess", "src\modules\Books\Books.DataAccess\Books.DataAccess.csproj", "{70E3B73E-B53B-41FE-9A95-C5758612930B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Books.DataAccess", "src\modules\Books\Books.DataAccess\Books.DataAccess.csproj", "{70E3B73E-B53B-41FE-9A95-C5758612930B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Books.Entity", "src\modules\Books\Books.Entity\Books.Entity.csproj", "{9E75F717-ADBE-41D8-8F1B-4DBE26119DA5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Books.Entity", "src\modules\Books\Books.Entity\Books.Entity.csproj", "{9E75F717-ADBE-41D8-8F1B-4DBE26119DA5}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Messaging", "Messaging", "{2BB00425-ADDF-4FDB-81B8-48DBB04D6899}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Messaging.Business", "src\modules\Messaging\Messaging.Business\Messaging.Business.csproj", "{F228E103-2ADF-477B-A668-CAA03E5E7CAF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Messaging.Business", "src\modules\Messaging\Messaging.Business\Messaging.Business.csproj", "{F228E103-2ADF-477B-A668-CAA03E5E7CAF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Messaging.DataAccess", "src\modules\Messaging\Messaging.DataAccess\Messaging.DataAccess.csproj", "{0D1D065B-0187-49F7-9420-B6689E9D0832}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Messaging.DataAccess", "src\modules\Messaging\Messaging.DataAccess\Messaging.DataAccess.csproj", "{0D1D065B-0187-49F7-9420-B6689E9D0832}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Messaging.Entity", "src\modules\Messaging\Messaging.Entity\Messaging.Entity.csproj", "{65762E30-00B9-43BA-9296-C59A13A3C2BC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Messaging.Entity", "src\modules\Messaging\Messaging.Entity\Messaging.Entity.csproj", "{65762E30-00B9-43BA-9296-C59A13A3C2BC}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Notifications", "Notifications", "{A9803295-2130-46CD-8481-DC1DCC614129}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Notifications.Business", "src\modules\Notifications\Notifications.Business\Notifications.Business.csproj", "{51A12233-01C4-4BAA-AB80-FB72F6CAE7F9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Notifications.Business", "src\modules\Notifications\Notifications.Business\Notifications.Business.csproj", "{51A12233-01C4-4BAA-AB80-FB72F6CAE7F9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Notifications.DataAccess", "src\modules\Notifications\Notifications.DataAccess\Notifications.DataAccess.csproj", "{2965C114-E102-48F3-B26A-8AADCE366473}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Notifications.DataAccess", "src\modules\Notifications\Notifications.DataAccess\Notifications.DataAccess.csproj", "{2965C114-E102-48F3-B26A-8AADCE366473}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Notifications.Entity", "src\modules\Notifications\Notifications.Entity\Notifications.Entity.csproj", "{362F8ECF-2B3B-4C01-A555-9F48ACEA86CC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Notifications.Entity", "src\modules\Notifications\Notifications.Entity\Notifications.Entity.csproj", "{362F8ECF-2B3B-4C01-A555-9F48ACEA86CC}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SearchAndFilter", "SearchAndFilter", "{FD94E518-E968-4035-8F4E-B9F14CF638EB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SearchAndFilter.Business", "src\modules\SearchAndFilter\SearchAndFilter.Business\SearchAndFilter.Business.csproj", "{6023EDB8-8CE8-43D3-BF2D-02208C3C285E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SearchAndFilter.Business", "src\modules\SearchAndFilter\SearchAndFilter.Business\SearchAndFilter.Business.csproj", "{6023EDB8-8CE8-43D3-BF2D-02208C3C285E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SearchAndFilter.DataAccess", "src\modules\SearchAndFilter\SearchAndFilter.DataAccess\SearchAndFilter.DataAccess.csproj", "{58AC3747-DDE7-485E-9F34-63390B162315}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SearchAndFilter.DataAccess", "src\modules\SearchAndFilter\SearchAndFilter.DataAccess\SearchAndFilter.DataAccess.csproj", "{58AC3747-DDE7-485E-9F34-63390B162315}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SearchAndFilter.Entity", "src\modules\SearchAndFilter\SearchAndFilter.Entity\SearchAndFilter.Entity.csproj", "{604173FC-BBDD-42AF-B530-EB2A36ADE84E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SearchAndFilter.Entity", "src\modules\SearchAndFilter\SearchAndFilter.Entity\SearchAndFilter.Entity.csproj", "{604173FC-BBDD-42AF-B530-EB2A36ADE84E}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UserManagement", "UserManagement", "{5925EA4B-D96B-4990-8D7E-F717124CE6AE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserManagement.Business", "src\modules\UserManagement\UserManagement.Business\UserManagement.Business.csproj", "{BDC4B6C0-683C-417E-9F59-0725B724BD44}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UserManagement.Business", "src\modules\UserManagement\UserManagement.Business\UserManagement.Business.csproj", "{BDC4B6C0-683C-417E-9F59-0725B724BD44}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserManagement.DataAccess", "src\modules\UserManagement\UserManagement.DataAccess\UserManagement.DataAccess.csproj", "{AB55EE50-9B0D-4063-9513-B0FB4DE2AEFE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UserManagement.DataAccess", "src\modules\UserManagement\UserManagement.DataAccess\UserManagement.DataAccess.csproj", "{AB55EE50-9B0D-4063-9513-B0FB4DE2AEFE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserManagement.Entity", "src\modules\UserManagement\UserManagement.Entity\UserManagement.Entity.csproj", "{95DBE70D-9B97-485C-9C4E-D1931D6FDF5E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UserManagement.Entity", "src\modules\UserManagement\UserManagement.Entity\UserManagement.Entity.csproj", "{95DBE70D-9B97-485C-9C4E-D1931D6FDF5E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "API", "src\API\API.csproj", "{7F727DCC-90AA-46DC-9053-9864CEAE1726}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "API", "src\API\API.csproj", "{7F727DCC-90AA-46DC-9053-9864CEAE1726}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared", "Shared", "{FDA503E8-9190-4A82-A19B-F298CB31DC95}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core", "src\Core\Core.csproj", "{194A2B5E-8029-4CD8-A354-8EA4299324A9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core", "src\Core\Core.csproj", "{194A2B5E-8029-4CD8-A354-8EA4299324A9}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{56629DC4-F387-4E67-AA99-40AE841543AA}"
 	ProjectSection(SolutionItems) = preProject
