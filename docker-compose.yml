@@ -12,6 +12,5 @@ services:
     volumes:
       - postgres_data:/c/Program Files/PostgreSQL/15
 
-
 volumes:
   postgres_data:
