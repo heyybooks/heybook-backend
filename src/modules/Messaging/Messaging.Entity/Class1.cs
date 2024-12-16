@@ -1,4 +1,4 @@
-﻿namespace SearchAndFilter.Business
+﻿namespace Messaging.Entity
 {
     public class Class1
     {

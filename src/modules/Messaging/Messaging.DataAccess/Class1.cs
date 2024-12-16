@@ -1,4 +1,4 @@
-﻿namespace SearchAndFilter.Business
+﻿namespace Messaging.DataAccess
 {
     public class Class1
     {

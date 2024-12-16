@@ -1,4 +1,4 @@
-﻿namespace SearchAndFilter.Business
+﻿namespace Notifications.DataAccess
 {
     public class Class1
     {
