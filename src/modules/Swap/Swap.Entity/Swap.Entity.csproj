@@ -6,4 +6,11 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\UserManagement\UserManagement.Entity\UserManagement.Entity.csproj" />
+    <ProjectReference Include="..\..\Books\Books.Entity\Books.Entity.csproj" />
+    <ProjectReference Include="..\..\..\Core\Core.csproj" />
+  </ItemGroup>
+
+
 </Project>
