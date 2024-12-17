@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Core.Entities;
 
+
 namespace UserManagement.Entity.Concrete
 {
     public class User : IEntity
