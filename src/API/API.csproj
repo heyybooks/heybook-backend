@@ -20,6 +20,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\modules\UserManagement\UserManagement.DataAccess\UserManagement.DataAccess.csproj" />
+    <ProjectReference Include="..\modules\Swap\Swap.DataAccess\Swap.DataAccess.csproj" />
+
   </ItemGroup>
 
 </Project>
