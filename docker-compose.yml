@@ -1,5 +1,4 @@
-
-services:
+﻿services:
   postgres:
     image: postgres:15.10
     container_name: bookswap
@@ -10,7 +9,8 @@ services:
     ports:
       - "5432:5432"
     volumes:
-      - postgres_data:/c/Program Files/PostgreSQL/15
+      # Postgres data dizinini container'ın içinde yönetmek için:
+      - postgres_data:/var/lib/postgresql/data
 
 volumes:
   postgres_data:
