@@ -17,8 +17,4 @@
     <ProjectReference Include="..\Books.Entity\Books.Entity.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Concrete\" />
-  </ItemGroup>
-
 </Project>

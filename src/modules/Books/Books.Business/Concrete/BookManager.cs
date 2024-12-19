@@ -70,10 +70,12 @@ namespace Books.Business.Concrete
             return new SuccessDataResult<Book>(book, Messages.BookListed);
         }
 
-        public IDataResult<Book> GetByName(string name)
+        public IDataResult<List<Book>> GetByName(string name)
         {
-            var book = _bookDal.Get(b => string.Equals(b.BookName, name, StringComparison.OrdinalIgnoreCase));
-            return new SuccessDataResult<Book>(book, Messages.BookListed);
+            var books = _bookDal.GetAll()
+                .Where(b => b.BookName.ToLower() == name.ToLower())
+                .ToList();
+            return new SuccessDataResult<List<Book>>(books, Messages.BookListed);
         }
 
 

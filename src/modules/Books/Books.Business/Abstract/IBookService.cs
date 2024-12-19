@@ -12,10 +12,10 @@ namespace Books.Business.Abstract
     {
         IDataResult<List<Book>> GetAll();
         IDataResult<Book> GetById(int id);
-        IDataResult<Book> GetByName(string name);
+        IDataResult<List<Book>> GetByName(string name);
         IDataResult<List<Book>> GetByCity(int CityId);
         IDataResult<List<Book>> GetAllByCategoryId(int CategoryId);
-        
+
         IResult Add(Book book);
         IResult Delete(Book book);
         IResult Update(Book book);

@@ -19,7 +19,7 @@ namespace Books.Entity.Concrete
         public DateTime CreatedDate { get; set; } // İlan oluşturma tarihi
         public bool IsActive { get; set; } // İlan aktif mi?
 
-      //  public ICollection<BookImage> BookImages { get; set; }
+       // public ICollection<BookImage> BookImages { get; set; }
 
     }
 }
