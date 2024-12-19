@@ -28,6 +28,7 @@ namespace UserManagement.Entity.Concrete
         public DateTime? LastLoginDate { get; set; }
         public DateTime CreatedAt { get; set; }
         public DateTime UpdatedAt { get; set; }
+        public int SuccessfulSwaps { get; set; }
         
     }
 }
