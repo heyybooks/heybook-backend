@@ -3,6 +3,7 @@ using System;
 using Core.DataAccess.EntityFramework;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Books.DataAccess.Migrations
 {
     [DbContext(typeof(HeybooksContext))]
-    partial class HeybooksContextModelSnapshot : ModelSnapshot
+    [Migration("20241218123621_MakeImageUrlNullable")]
+    partial class MakeImageUrlNullable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -100,12 +103,17 @@ namespace Books.DataAccess.Migrations
             modelBuilder.Entity("Books.Entity.Concrete.BookImage", b =>
                 {
                     b.HasOne("Books.Entity.Concrete.Book", "Book")
-                        .WithMany()
+                        .WithMany("BookImages")
                         .HasForeignKey("BookId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Book");
+                });
+
+            modelBuilder.Entity("Books.Entity.Concrete.Book", b =>
+                {
+                    b.Navigation("BookImages");
                 });
 #pragma warning restore 612, 618
         }

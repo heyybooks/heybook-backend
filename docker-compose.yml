@@ -1,5 +1,4 @@
-
-services:
+﻿services:
   postgres:
     image: postgres:lates
     container_name: ${POSTGRES_CONTAINER_NAME}
@@ -8,9 +7,10 @@ services:
       POSTGRES_PASSWORD: ${DB_PASSWORD}
       POSTGRES_DB: ${DB_NAME}
     ports:
-      - "5433:5432"
+      - "${DB_PORT}:5432"
     volumes:
-      - postgres_data:/c/Program Files/PostgreSQL/15
+      # Postgres data dizinini container'ın içinde yönetmek için:
+      - postgres_data:/var/lib/postgresql/data
 
 volumes:
   postgres_data:
