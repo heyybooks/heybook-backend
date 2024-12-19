@@ -24,7 +24,6 @@ namespace Swap.DataAccess.EntityFramework
                 }
             }
         public DbSet<SwapRequest> SwapRequests { get; set; }
-        public DbSet<SwapHistory> SwapHistories { get; set; }
         public DbSet<SwapRating> SwapRatings { get; set; }
     }
 }
