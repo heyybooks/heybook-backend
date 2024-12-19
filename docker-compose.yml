@@ -1,7 +1,6 @@
-﻿
-services:
+﻿services:
   postgres:
-    image: postgres:lates
+    image: postgres:15.10
     container_name: ${POSTGRES_CONTAINER_NAME}
     environment:
       POSTGRES_USER: ${DB_USER}
@@ -10,6 +9,7 @@ services:
     ports:
       - "${DB_PORT}:5432"
     volumes:
+      # Postgres data dizinini container'ın içinde yönetmek için:
       - postgres_data:/var/lib/postgresql/data
 
 volumes:
