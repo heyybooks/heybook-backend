@@ -7,7 +7,7 @@ using Core.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Autofac Service Provider Factory ekleme (�NCEL?KL? OLMALI)
+// Autofac Service Provider Factory ekleme (ÖNCEL?KL? OLMALI)
 builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory());
 builder.Host.ConfigureContainer<ContainerBuilder>(builder =>
 {
@@ -33,14 +33,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-<<<<<<< HEAD
-
-
-
 app.UseHttpsRedirection();
-=======
-app.UseHttpsRedirection();
->>>>>>> ca1265fce8c024fe9504a7fee15d778f64f78836
 
 app.UseAuthorization();
 

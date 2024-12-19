@@ -1,6 +1,6 @@
 ﻿services:
   postgres:
-    image: postgres:lates
+    image: postgres:15.10
     container_name: ${POSTGRES_CONTAINER_NAME}
     environment:
       POSTGRES_USER: ${DB_USER}
