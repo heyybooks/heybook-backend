@@ -1,52 +1,44 @@
-using Swap.Business.DependencyResolvers;
-using Microsoft.OpenApi.Models;
-using Autofac;
-
 using Microsoft.Extensions.Options;
+using Autofac;
+using Autofac.Extensions.DependencyInjection;
+using Books.Business.DependencyResolvers.Autofac;
+using Core.DependencyResolvers;
+using Core.Utilities.IoC;
+using Core.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-builder.Services.AddControllers();
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen(c =>
+// Autofac Service Provider Factory ekleme (ÖNCEL?KL? OLMALI)
+builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory());
+builder.Host.ConfigureContainer<ContainerBuilder>(builder =>
 {
-    c.SwaggerDoc("v1", new OpenApiInfo { 
-        Title = "Swap API", 
-        Version = "v1" 
-    });
+    builder.RegisterModule(new AutofacBusinessModule());
 });
 
-//swap extension
-builder.Services.AddSwapServices();
+// Add services to the container.
+
 
 
 
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+// Core ba??ml?l?klar?n? ekleme
+//builder.Services.AddDependencyResolvers(new ICoreModule[]
+//{
+//    new CoreModule()
+//});
+
 var app = builder.Build();
 
-
-
-// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
 }
 
-// Configure middleware
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI(c =>
-    {
-        c.SwaggerEndpoint("/swagger/v1/swagger.json", "Swap API V1");
-    });
-}
+
 
 
 app.UseHttpsRedirection();
