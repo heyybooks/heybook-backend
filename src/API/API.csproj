@@ -10,13 +10,16 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="9.0.0" />
+   <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.0" />
+    <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="8.2.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="9.0.0">
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-      <PrivateAssets>all</PrivateAssets>
+    <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    <PrivateAssets>all</PrivateAssets>
     </PackageReference>
+    <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="8.0.0" />
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.21.0" />
-    <PackageReference Include="Swashbuckle.AspNetCore" Version="7.2.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.2" />
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="9.0.2" />
   </ItemGroup>
 
   <ItemGroup>
@@ -26,7 +29,7 @@
     <ProjectReference Include="..\modules\Books\Books.Entity\Books.Entity.csproj" />
     <ProjectReference Include="..\modules\UserManagement\UserManagement.DataAccess\UserManagement.DataAccess.csproj" />
     <ProjectReference Include="..\modules\Swap\Swap.DataAccess\Swap.DataAccess.csproj" />
-
+    <ProjectReference Include="..\modules\Swap\Swap.Business\Swap.Business.csproj" />
   </ItemGroup>
 
 </Project>

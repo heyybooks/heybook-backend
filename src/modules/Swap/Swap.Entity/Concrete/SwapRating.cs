@@ -10,7 +10,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Swap.Entity.Concrete
 {
-    public class SwapRating
+    public class SwapRating : IEntity
     {
         [Key] 
         public int RatingId { get; set; }

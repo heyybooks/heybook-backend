@@ -98,42 +98,6 @@ namespace Swap.DataAccess.Migrations
                     b.ToTable("BookImage");
                 });
 
-            modelBuilder.Entity("Swap.Entity.Concrete.SwapHistory", b =>
-                {
-                    b.Property<int>("HistoryId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("HistoryId"));
-
-                    b.Property<DateTime>("ChangedAt")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<int>("ChangedByUserId")
-                        .HasColumnType("integer");
-
-                    b.Property<string>("Notes")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<int>("StatusFrom")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("StatusTo")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("SwapRequestId")
-                        .HasColumnType("integer");
-
-                    b.HasKey("HistoryId");
-
-                    b.HasIndex("ChangedByUserId");
-
-                    b.HasIndex("SwapRequestId");
-
-                    b.ToTable("SwapHistories");
-                });
-
             modelBuilder.Entity("Swap.Entity.Concrete.SwapRating", b =>
                 {
                     b.Property<int>("RatingId")
@@ -280,6 +244,9 @@ namespace Swap.DataAccess.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
+                    b.Property<int>("SuccessfulSwaps")
+                        .HasColumnType("integer");
+
                     b.Property<int>("TotalSwaps")
                         .HasColumnType("integer");
 
@@ -304,25 +271,6 @@ namespace Swap.DataAccess.Migrations
                         .IsRequired();
 
                     b.Navigation("Book");
-                });
-
-            modelBuilder.Entity("Swap.Entity.Concrete.SwapHistory", b =>
-                {
-                    b.HasOne("UserManagement.Entity.Concrete.User", "ChangedByUser")
-                        .WithMany()
-                        .HasForeignKey("ChangedByUserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Swap.Entity.Concrete.SwapRequest", "SwapRequest")
-                        .WithMany()
-                        .HasForeignKey("SwapRequestId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("ChangedByUser");
-
-                    b.Navigation("SwapRequest");
                 });
 
             modelBuilder.Entity("Swap.Entity.Concrete.SwapRating", b =>

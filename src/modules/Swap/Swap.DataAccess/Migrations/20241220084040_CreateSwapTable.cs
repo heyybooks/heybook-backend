@@ -58,7 +58,8 @@ namespace Swap.DataAccess.Migrations
                     Status = table.Column<string>(type: "text", nullable: false),
                     LastLoginDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
                     CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    UpdatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
+                    UpdatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    SuccessfulSwaps = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -125,36 +126,6 @@ namespace Swap.DataAccess.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "SwapHistories",
-                columns: table => new
-                {
-                    HistoryId = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    SwapRequestId = table.Column<int>(type: "integer", nullable: false),
-                    StatusFrom = table.Column<int>(type: "integer", nullable: false),
-                    StatusTo = table.Column<int>(type: "integer", nullable: false),
-                    ChangedByUserId = table.Column<int>(type: "integer", nullable: false),
-                    ChangedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    Notes = table.Column<string>(type: "text", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_SwapHistories", x => x.HistoryId);
-                    table.ForeignKey(
-                        name: "FK_SwapHistories_SwapRequests_SwapRequestId",
-                        column: x => x.SwapRequestId,
-                        principalTable: "SwapRequests",
-                        principalColumn: "RequestId",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_SwapHistories_User_ChangedByUserId",
-                        column: x => x.ChangedByUserId,
-                        principalTable: "User",
-                        principalColumn: "UserId",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "SwapRatings",
                 columns: table => new
                 {
@@ -196,16 +167,6 @@ namespace Swap.DataAccess.Migrations
                 column: "BookId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_SwapHistories_ChangedByUserId",
-                table: "SwapHistories",
-                column: "ChangedByUserId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_SwapHistories_SwapRequestId",
-                table: "SwapHistories",
-                column: "SwapRequestId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_SwapRatings_RatedByUserId",
                 table: "SwapRatings",
                 column: "RatedByUserId");
@@ -241,9 +202,6 @@ namespace Swap.DataAccess.Migrations
         {
             migrationBuilder.DropTable(
                 name: "BookImage");
-
-            migrationBuilder.DropTable(
-                name: "SwapHistories");
 
             migrationBuilder.DropTable(
                 name: "SwapRatings");
