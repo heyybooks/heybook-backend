@@ -1,6 +1,6 @@
 using Swap.Business.DependencyResolvers;
 using Microsoft.OpenApi.Models;
-
+using Autofac;
 
 using Microsoft.Extensions.Options;
 

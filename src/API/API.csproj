@@ -22,6 +22,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Core\Core.csproj" />
+    <ProjectReference Include="..\modules\Books\Books.Business\Books.Business.csproj" />
+    <ProjectReference Include="..\modules\Books\Books.DataAccess\Books.DataAccess.csproj" />
+    <ProjectReference Include="..\modules\Books\Books.Entity\Books.Entity.csproj" />
     <ProjectReference Include="..\modules\UserManagement\UserManagement.DataAccess\UserManagement.DataAccess.csproj" />
     <ProjectReference Include="..\modules\Swap\Swap.DataAccess\Swap.DataAccess.csproj" />
     <ProjectReference Include="..\modules\Swap\Swap.Business\Swap.Business.csproj" />
