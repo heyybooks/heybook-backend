@@ -1,5 +1,6 @@
 ﻿using Core.Entities;
 
+
 namespace Books.Entity.Concrete
 {
     public class Book : IEntity

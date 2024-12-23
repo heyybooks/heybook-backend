@@ -63,6 +63,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Books.Business", "src\modules\Books\Books.Business\Books.Business.csproj", "{9EAC8C66-EA7D-4D7D-9E22-FDE19337C823}"
+
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -134,10 +135,12 @@ Global
 		{194A2B5E-8029-4CD8-A354-8EA4299324A9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{194A2B5E-8029-4CD8-A354-8EA4299324A9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{194A2B5E-8029-4CD8-A354-8EA4299324A9}.Release|Any CPU.Build.0 = Release|Any CPU
+
 		{9EAC8C66-EA7D-4D7D-9E22-FDE19337C823}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{9EAC8C66-EA7D-4D7D-9E22-FDE19337C823}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9EAC8C66-EA7D-4D7D-9E22-FDE19337C823}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9EAC8C66-EA7D-4D7D-9E22-FDE19337C823}.Release|Any CPU.Build.0 = Release|Any CPU
+
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -167,6 +170,7 @@ Global
 		{FDA503E8-9190-4A82-A19B-F298CB31DC95} = {53380C22-3F9B-4ACD-A7C2-CEFBA668DC6D}
 		{194A2B5E-8029-4CD8-A354-8EA4299324A9} = {FDA503E8-9190-4A82-A19B-F298CB31DC95}
 		{9EAC8C66-EA7D-4D7D-9E22-FDE19337C823} = {BBBE13B1-7207-470D-956B-006D23431382}
+
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {3929195C-CF1F-4DE4-A597-EC8671B9004F}

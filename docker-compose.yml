@@ -1,13 +1,13 @@
 ﻿services:
   postgres:
     image: postgres:15.10
-    container_name: bookswap
+    container_name: ${POSTGRES_CONTAINER_NAME}
     environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: admin123
-      POSTGRES_DB: hey-books
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: ${DB_NAME}
     ports:
-      - "5432:5432"
+      - "${DB_PORT}:5432"
     volumes:
       # Postgres data dizinini container'ın içinde yönetmek için:
       - postgres_data:/var/lib/postgresql/data
