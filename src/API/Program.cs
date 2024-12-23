@@ -18,6 +18,7 @@ builder.Host.ConfigureContainer<ContainerBuilder>(builder =>
     builder.RegisterModule(new AutofacBusinessModule());
 });
 
+
 // Add services to the container.
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
@@ -37,11 +38,19 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-// Core ba??ml?l?klar?n? ekleme
-//builder.Services.AddDependencyResolvers(new ICoreModule[]
-//{
-//    new CoreModule()
-//});
+// CORS 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAllOrigins",
+        builder =>
+        {
+            builder.AllowAnyOrigin()
+                   .AllowAnyMethod()
+                   .AllowAnyHeader();
+        });
+});
+
+
 
 var app = builder.Build();
 
@@ -59,6 +68,8 @@ if (app.Environment.IsDevelopment())
 
 
 app.UseHttpsRedirection();
+app.UseRouting(); // UseRouting'i eklemeyi unutmay?n
+app.UseCors("AllowAllOrigins"); // CORS politikas?n? buraya ekleyin
 
 app.UseAuthorization();
 

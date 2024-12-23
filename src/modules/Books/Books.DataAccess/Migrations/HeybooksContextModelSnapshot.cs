@@ -36,7 +36,8 @@ namespace Books.DataAccess.Migrations
 
                     b.Property<string>("BookName")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasMaxLength(200)
+                        .HasColumnType("character varying(200)");
 
                     b.Property<int>("CategoryId")
                         .HasColumnType("integer");
@@ -49,7 +50,9 @@ namespace Books.DataAccess.Migrations
                         .HasColumnType("text");
 
                     b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("timestamp with time zone");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("timestamp with time zone")
+                        .HasDefaultValueSql("NOW()");
 
                     b.Property<string>("Description")
                         .IsRequired()
@@ -88,7 +91,9 @@ namespace Books.DataAccess.Migrations
                         .HasColumnType("text");
 
                     b.Property<DateTime>("UploadedDate")
-                        .HasColumnType("timestamp with time zone");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("timestamp with time zone")
+                        .HasDefaultValueSql("NOW()");
 
                     b.HasKey("BookImageId");
 
@@ -100,12 +105,17 @@ namespace Books.DataAccess.Migrations
             modelBuilder.Entity("Books.Entity.Concrete.BookImage", b =>
                 {
                     b.HasOne("Books.Entity.Concrete.Book", "Book")
-                        .WithMany()
+                        .WithMany("BookImages")
                         .HasForeignKey("BookId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Book");
+                });
+
+            modelBuilder.Entity("Books.Entity.Concrete.Book", b =>
+                {
+                    b.Navigation("BookImages");
                 });
 #pragma warning restore 612, 618
         }
