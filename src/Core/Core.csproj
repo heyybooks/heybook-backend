@@ -7,15 +7,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="CrossCuttingConcerns\Caching\Redis\**" />
+    <EmbeddedResource Remove="CrossCuttingConcerns\Caching\Redis\**" />
+    <None Remove="CrossCuttingConcerns\Caching\Redis\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Autofac" Version="8.1.1" />
     <PackageReference Include="Autofac.Extras.DynamicProxy" Version="7.1.0" />
     <PackageReference Include="Microsoft.AspNetCore.Http" Version="2.1.34" />
     <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.1.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.11" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="CrossCuttingConcerns\Caching\Redis\" />
   </ItemGroup>
 
 </Project>

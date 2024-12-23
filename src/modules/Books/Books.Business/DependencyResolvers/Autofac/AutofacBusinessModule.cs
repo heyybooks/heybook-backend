@@ -6,11 +6,6 @@ using Books.DataAccess.Abstract;
 using Books.DataAccess.EntityFramework;
 using Castle.DynamicProxy;
 using Core.Utilities.Interceptors;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Books.Business.DependencyResolvers.Autofac
 {
@@ -20,6 +15,7 @@ namespace Books.Business.DependencyResolvers.Autofac
         {
             builder.RegisterType<BookManager>().As<IBookService>().SingleInstance();
             builder.RegisterType<EfBookDal>().As<IBookDal>().SingleInstance();
+            builder.RegisterType<EfBookImageDal>().As<IBookImageDal>().SingleInstance();
 
             var assembly = System.Reflection.Assembly.GetExecutingAssembly();
 

@@ -18,7 +18,7 @@ namespace Books.DataAccess.Migrations
                 {
                     BookId = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    BookName = table.Column<string>(type: "text", nullable: false),
+                    BookName = table.Column<string>(type: "character varying(200)", maxLength: 200, nullable: false),
                     Author = table.Column<string>(type: "text", nullable: false),
                     Description = table.Column<string>(type: "text", nullable: false),
                     Publisher = table.Column<string>(type: "text", nullable: false),
@@ -27,7 +27,7 @@ namespace Books.DataAccess.Migrations
                     CityId = table.Column<int>(type: "integer", nullable: false),
                     Condition = table.Column<string>(type: "text", nullable: false),
                     OwnerId = table.Column<int>(type: "integer", nullable: false),
-                    CreatedDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    CreatedDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false, defaultValueSql: "NOW()"),
                     IsActive = table.Column<bool>(type: "boolean", nullable: false)
                 },
                 constraints: table =>
@@ -42,8 +42,8 @@ namespace Books.DataAccess.Migrations
                     BookImageId = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     BookId = table.Column<int>(type: "integer", nullable: false),
-                    ImageUrl = table.Column<string>(type: "text", nullable: false),
-                    UploadedDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
+                    ImageUrl = table.Column<string>(type: "text", nullable: true),
+                    UploadedDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false, defaultValueSql: "NOW()")
                 },
                 constraints: table =>
                 {
