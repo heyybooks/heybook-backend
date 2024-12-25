@@ -1,4 +1,5 @@
 ﻿using Books.Entity.Concrete;
+using Books.Entity.DTOs;
 using Core.Utilities.Results.Abstract;
 using System;
 using System.Collections.Generic;
@@ -19,6 +20,6 @@ namespace Books.Business.Abstract
         IResult Add(Book book);
         IResult Delete(Book book);
         IResult Update(Book book);
-
+        IResult AddWithImages(BookCreateDto bookCreateDto);
     }
 }

@@ -1,11 +1,14 @@
 ﻿using Books.Business.Abstract;
 using Books.Business.Constants;
 using Books.Entity.Concrete;
+using Books.Entity.DTOs;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
 {
     [Route("api/[controller]")]
+    [EnableCors("AllowAllOrigins")]
     [ApiController]
     public class BooksController : ControllerBase
     {
@@ -16,15 +19,17 @@ namespace API.Controllers
             _bookService = bookService;
         }
 
+
         [HttpPost]
-        public IActionResult Add([FromBody] Book book)
+        public IActionResult AddWithImages([FromBody] BookCreateDto bookCreateDto)
         {
-            if (book == null)
+            if (bookCreateDto == null)
                 return BadRequest(Messages.BookInvalid);
 
-            var result = _bookService.Add(book);
-            return result.IsSuccess ? Ok(result.Message) : BadRequest(result.Message);
+            var result = _bookService.AddWithImages(bookCreateDto);
+            return result.IsSuccess ? Ok(result) : BadRequest(result.Message);
         }
+
 
         [HttpGet]
         public IActionResult GetAll()
