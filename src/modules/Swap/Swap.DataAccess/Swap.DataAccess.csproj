@@ -2,6 +2,8 @@
   <ItemGroup>
     <ProjectReference Include="..\..\..\Core\Core.csproj" />
     <ProjectReference Include="..\Swap.Entity\Swap.Entity.csproj" />
+    
+
   </ItemGroup>
 
   <ItemGroup>
