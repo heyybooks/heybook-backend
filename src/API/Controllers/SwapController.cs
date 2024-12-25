@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Swap.Business.Abstract;
+using Swap.Business.DTOs;
 using Swap.Entity.Concrete;
 using Swap.Entity.Enums;
 
@@ -63,11 +64,19 @@ namespace API.Controllers
         }
 
         [HttpPost]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> CreateSwapRequest([FromBody] SwapRequest request)
+        public async Task<IActionResult> CreateSwapRequest([FromBody] CreateSwapRequestDto dto)
         {
-            _logger.LogInformation("Creating new swap request");
+            var request = new SwapRequest
+            {
+                RequesterId = dto.RequesterId,
+                RequestedBookId = dto.RequestedBookId,
+                OfferedBookId = dto.OfferedBookId,
+                Notes = dto.Notes,
+                Status = SwapStatus.Pending,
+                CreatedAt = DateTime.UtcNow,
+                UpdatedAt = DateTime.UtcNow
+            };
+
             var result = await _swapService.CreateSwapRequest(request);
             return result.IsSuccess ? Ok(result.Message) : BadRequest(result.Message);
         }

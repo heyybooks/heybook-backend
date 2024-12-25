@@ -10,7 +10,7 @@ namespace Books.Entity.Concrete
         public string? ImageUrl { get; set; } // Fotoğrafın URL'si
         public DateTime UploadedDate { get; set; } = DateTime.UtcNow;
         // Yükleme tarihi
-        public Book Book { get; set; }
+        public virtual Book Book { get; set; }
     }
 }
 
