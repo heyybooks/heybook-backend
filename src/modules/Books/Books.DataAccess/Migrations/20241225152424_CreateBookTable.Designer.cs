@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Books.DataAccess.Migrations
 {
     [DbContext(typeof(HeybooksContext))]
-    [Migration("20241223114341_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20241225152424_CreateBookTable")]
+    partial class CreateBookTable
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -76,7 +76,7 @@ namespace Books.DataAccess.Migrations
 
                     b.HasKey("BookId");
 
-                    b.ToTable("Books");
+                    b.ToTable("Book");
                 });
 
             modelBuilder.Entity("Books.Entity.Concrete.BookImage", b =>
@@ -102,7 +102,7 @@ namespace Books.DataAccess.Migrations
 
                     b.HasIndex("BookId");
 
-                    b.ToTable("BookImages");
+                    b.ToTable("BookImage");
                 });
 
             modelBuilder.Entity("Books.Entity.Concrete.BookImage", b =>

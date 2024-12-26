@@ -7,13 +7,13 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Books.DataAccess.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialCreate : Migration
+    public partial class CreateBookTable : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Books",
+                name: "Book",
                 columns: table => new
                 {
                     BookId = table.Column<int>(type: "integer", nullable: false)
@@ -32,11 +32,11 @@ namespace Books.DataAccess.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Books", x => x.BookId);
+                    table.PrimaryKey("PK_Book", x => x.BookId);
                 });
 
             migrationBuilder.CreateTable(
-                name: "BookImages",
+                name: "BookImage",
                 columns: table => new
                 {
                     BookImageId = table.Column<int>(type: "integer", nullable: false)
@@ -47,18 +47,18 @@ namespace Books.DataAccess.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_BookImages", x => x.BookImageId);
+                    table.PrimaryKey("PK_BookImage", x => x.BookImageId);
                     table.ForeignKey(
-                        name: "FK_BookImages_Books_BookId",
+                        name: "FK_BookImage_Book_BookId",
                         column: x => x.BookId,
-                        principalTable: "Books",
+                        principalTable: "Book",
                         principalColumn: "BookId",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_BookImages_BookId",
-                table: "BookImages",
+                name: "IX_BookImage_BookId",
+                table: "BookImage",
                 column: "BookId");
         }
 
@@ -66,10 +66,10 @@ namespace Books.DataAccess.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "BookImages");
+                name: "BookImage");
 
             migrationBuilder.DropTable(
-                name: "Books");
+                name: "Book");
         }
     }
 }

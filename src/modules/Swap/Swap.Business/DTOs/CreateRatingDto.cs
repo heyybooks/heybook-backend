@@ -10,6 +10,6 @@ namespace Swap.Business.DTOs
         public int SwapRequestId { get; set; }
         public int RatedUserId { get; set; }
         public int Rating { get; set; }
-        public string Comment { get; set; }
+        public string? Comment { get; set; }
     }
 }

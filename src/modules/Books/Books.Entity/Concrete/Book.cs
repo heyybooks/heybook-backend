@@ -5,6 +5,7 @@ namespace Books.Entity.Concrete
 {
     public class Book : IEntity
     {
+    
         public int BookId { get; set; } // Kitap ID'si
         public string BookName { get; set; } // Kitap adı
         public string Author { get; set; } // Yazar adı
@@ -21,6 +22,7 @@ namespace Books.Entity.Concrete
         public bool IsActive { get; set; } // İlan aktif mi?
 
         public virtual ICollection<BookImage> BookImages { get; set; }
+      
 
     }
 }

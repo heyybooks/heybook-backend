@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Swap.Business.Abstract;
 using Swap.Business.DTOs;
+using Swap.DataAccess.EntityFramework;
 using Swap.Entity.Concrete;
 using Swap.Entity.Enums;
 
@@ -26,11 +27,38 @@ namespace API.Controllers
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> GetAll()
         {
             _logger.LogInformation("Getting all swap requests");
-            var result = await _swapService.GetAll();
-            return result.IsSuccess ? Ok(result.Data) : BadRequest(result.Message);
+
+            try
+            {
+                var result = await _swapService.GetAll();
+
+                _logger.LogInformation($"GetAll result: {result}");
+
+                // Verinin null olup olmadığını kontrol et
+                if (result == null || !result.IsSuccess)
+                {
+                    _logger.LogError("Swap service returned null or failed.");
+                    return StatusCode(StatusCodes.Status500InternalServerError, "An unexpected error occurred.");
+                }
+
+                if (result.Data == null || result.Data.Count == 0)
+                {
+                    _logger.LogWarning("No swap requests found.");
+                    return Ok(new List<SwapRequestDto>());
+                }
+
+                return Ok(result.Data);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"An error occurred: {ex.Message}");
+                return StatusCode(StatusCodes.Status500InternalServerError, "An unexpected error occurred.");
+            }
+            
         }
 
         [HttpGet("{id}")]
@@ -58,35 +86,45 @@ namespace API.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> GetByStatus(SwapStatus status)
         {
-            _logger.LogInformation($"Getting swap requests with status: {status}");
-            var result = await _swapService.GetByStatus(status);
-            return result.IsSuccess ? Ok(result.Data) : NotFound("No swap requests found");
-        }
+            _logger.LogInformation("Getting all swap requests");
 
-        [HttpPost]
-        public async Task<IActionResult> CreateSwapRequest([FromBody] CreateSwapRequestDto dto)
-        {
-            var request = new SwapRequest
+            try
             {
-                RequesterId = dto.RequesterId,
-                RequestedBookId = dto.RequestedBookId,
-                OfferedBookId = dto.OfferedBookId,
-                Notes = dto.Notes,
-                Status = SwapStatus.Pending,
-                CreatedAt = DateTime.UtcNow,
-                UpdatedAt = DateTime.UtcNow
-            };
+                var result = await _swapService.GetAll();
+                _logger.LogInformation($"GetAll result: {result}");
 
-            var result = await _swapService.CreateSwapRequest(request);
-            return result.IsSuccess ? Ok(result.Message) : BadRequest(result.Message);
+                if (result == null || !result.IsSuccess)
+                {
+                    _logger.LogError("Swap service returned null or failed.");
+                    return StatusCode(StatusCodes.Status500InternalServerError, "An unexpected error occurred.");
+                }
+
+                if (result.Data == null || result.Data.Count == 0)
+                {
+                    _logger.LogWarning("No swap requests found.");
+                    return Ok(new List<SwapRequestDto>());
+                }
+
+                return Ok(result.Data);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"An error occurred: {ex.Message}");
+                return StatusCode(StatusCodes.Status500InternalServerError, "An unexpected error occurred.");
+            }
         }
 
         [HttpPut("{requestId}/status")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        
         public async Task<IActionResult> UpdateStatus(int requestId, [FromBody] SwapStatus status)
         {
             _logger.LogInformation($"Updating status for swap request {requestId} to {status}");
+            if (!Enum.IsDefined(typeof(SwapStatus), status))
+            {
+            return BadRequest("Invalid status value");
+            }
             var result = await _swapService.UpdateSwapStatus(requestId, status);
             return result.IsSuccess ? Ok(result.Message) : BadRequest(result.Message);
         }

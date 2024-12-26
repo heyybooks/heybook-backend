@@ -12,7 +12,7 @@ using UserManagement.DataAccess.EntityFramework;
 namespace UserManagement.DataAccess.Migrations
 {
     [DbContext(typeof(UserDbContext))]
-    [Migration("20241216162429_CreateUserTable")]
+    [Migration("20241225173538_CreateUserTable")]
     partial class CreateUserTable
     {
         /// <inheritdoc />
@@ -88,6 +88,9 @@ namespace UserManagement.DataAccess.Migrations
                     b.Property<string>("Status")
                         .IsRequired()
                         .HasColumnType("text");
+
+                    b.Property<int>("SuccessfulSwaps")
+                        .HasColumnType("integer");
 
                     b.Property<int>("TotalSwaps")
                         .HasColumnType("integer");

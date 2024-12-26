@@ -21,6 +21,18 @@ namespace Swap.DataAccess.EntityFramework
                     .ToListAsync();
             }
         }
+        public async Task<List<SwapRequest>> GetAllSwapRequests()
+        {
+            using (var context = new SwapDbContext())
+            {
+                return await context.SwapRequests
+                    .Include(s => s.RequestedBook)
+                    .Include(s => s.OfferedBook)
+                    .Include(s => s.Requester) // Kullanıcı bilgilerini de çek
+                    .OrderByDescending(s => s.CreatedAt) // En yeni istekler önce gelsin
+                    .ToListAsync();
+            }
+        }
     }
 
 

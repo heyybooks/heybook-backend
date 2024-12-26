@@ -73,7 +73,7 @@ namespace Books.DataAccess.Migrations
 
                     b.HasKey("BookId");
 
-                    b.ToTable("Books");
+                    b.ToTable("Book");
                 });
 
             modelBuilder.Entity("Books.Entity.Concrete.BookImage", b =>
@@ -99,7 +99,7 @@ namespace Books.DataAccess.Migrations
 
                     b.HasIndex("BookId");
 
-                    b.ToTable("BookImages");
+                    b.ToTable("BookImage");
                 });
 
             modelBuilder.Entity("Books.Entity.Concrete.BookImage", b =>

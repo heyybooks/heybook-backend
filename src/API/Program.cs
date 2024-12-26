@@ -32,6 +32,8 @@ builder.Services.AddSwaggerGen(c =>
 
 //swap extension
 builder.Services.AddSwapServices();
+// Legacy
+AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
 
 
 builder.Services.AddControllers();
@@ -67,7 +69,7 @@ if (app.Environment.IsDevelopment())
 
 
 
-app.UseHttpsRedirection();
+//app.UseHttpsRedirection();
 app.UseRouting(); // UseRouting'i eklemeyi unutmay?n
 app.UseCors("AllowAllOrigins"); // CORS politikas?n? buraya ekleyin
 

@@ -10,6 +10,7 @@ namespace Swap.DataAccess.Abstract
     public interface ISwapDal : IEntityRepository<SwapRequest> 
     {
         Task<List<SwapRequest>> GetUserSwaps(int userId);
+        Task<List<SwapRequest>> GetAllSwapRequests();
 }
 
 }

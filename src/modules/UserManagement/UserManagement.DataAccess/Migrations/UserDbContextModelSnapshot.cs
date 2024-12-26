@@ -86,6 +86,9 @@ namespace UserManagement.DataAccess.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
+                    b.Property<int>("SuccessfulSwaps")
+                        .HasColumnType("integer");
+
                     b.Property<int>("TotalSwaps")
                         .HasColumnType("integer");
 

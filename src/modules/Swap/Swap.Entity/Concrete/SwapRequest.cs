@@ -23,21 +23,21 @@ namespace Swap.Entity.Concrete
 
         [Required]
         public int OfferedBookId { get; set; }
-        public SwapStatus Status { get; set; } = SwapStatus.Pending;
-        public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
-        public DateTime UpdatedAt { get; set; } = DateTime.UtcNow;
+        public SwapStatus Status { get; set; } 
+        public DateTime CreatedAt { get; set; } 
+        public DateTime UpdatedAt { get; set; } 
         public DateTime? CompletedAt { get; set; }
 
         [MaxLength(500)]
-        public string Notes { get; set; }
+        public string? Notes { get; set; }
 
         
-        public User Requester { get; set; }
+        public virtual  User Requester { get; set; }
 
         
-        public Book RequestedBook { get; set; }
+        public virtual Book RequestedBook { get; set; }
 
         
-        public Book OfferedBook { get; set; }
+        public virtual Book OfferedBook { get; set; }
     }
 }

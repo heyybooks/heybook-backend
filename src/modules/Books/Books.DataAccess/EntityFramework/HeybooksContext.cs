@@ -6,8 +6,8 @@ namespace Core.DataAccess.EntityFramework
 {
     public class HeybooksContext : DbContext
     {
-        public DbSet<Book> Books { get; set; }
-        public DbSet<BookImage> BookImages { get; set; }
+        public DbSet<Book> Book { get; set; }
+        public DbSet<BookImage> BookImage { get; set; }
         // Veritabanı bağlantı ayarları burada yapılır
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

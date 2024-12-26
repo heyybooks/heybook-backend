@@ -9,5 +9,8 @@
 <ItemGroup>
     <ProjectReference Include="..\Swap.Entity\Swap.Entity.csproj" />
     <ProjectReference Include="..\Swap.DataAccess\Swap.DataAccess.csproj" />
+    <ProjectReference Include="..\..\Books\Books.Business\Books.Business.csproj" />
+  
+
   </ItemGroup>
 </Project>

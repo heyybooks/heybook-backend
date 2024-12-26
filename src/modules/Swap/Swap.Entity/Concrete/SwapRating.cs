@@ -17,17 +17,19 @@ namespace Swap.Entity.Concrete
         public int SwapRequestId { get; set; }
         public int RatedByUserId { get; set; }
         public int RatedUserId { get; set; }
+        
+        [Range(1, 5, ErrorMessage = "Rating must be between 1 and 5.")]
         public int Rating { get; set; }
-        public string Comment { get; set; }
-        public DateTime CreatedAt { get; set; }
+        public string? Comment { get; set; }
+        public DateTime CreatedAt { get; set; }  = DateTime.UtcNow;
         
         // Navigation properties 
-        public SwapRequest SwapRequest { get; set; }
+        public virtual SwapRequest SwapRequest { get; set; }
 
         
-        public User RatedByUser { get; set; }
+        public virtual User RatedByUser { get; set; }
 
       
-        public User RatedUser { get; set; }
+        public virtual User RatedUser { get; set; }
     }
 }

@@ -19,7 +19,7 @@ namespace UserManagement.DataAccess.EntityFramework
                     optionsBuilder.UseNpgsql("Host=localhost;Port=5432;Database=hey-books;Username=postgres;Password=admin123");
                 }
             }
-        public DbSet<User> Users { get; set; }   
+        public DbSet<User> User { get; set; }   
 
         
     }
