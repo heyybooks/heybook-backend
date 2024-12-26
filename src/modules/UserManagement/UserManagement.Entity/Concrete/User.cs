@@ -21,16 +21,16 @@ namespace UserManagement.Entity.Concrete
         public string PhoneNumber { get; set; }
         public string Address { get; set; }
         public string City { get; set; }
-        public string ProfilePicture { get; set; }
-        public string Bio { get; set; }
-        public decimal Rating { get; set; }
-        public int TotalSwaps { get; set; }
-        public bool IsVerified { get; set; }
-        public string Status { get; set; }
+        public string? ProfilePicture { get; set; }
+        public string? Bio { get; set; }
+        public decimal? Rating { get; set; }
+        public int? TotalSwaps { get; set; }
+        public bool? IsVerified { get; set; }
+        public string? Status { get; set; }
         public DateTime? LastLoginDate { get; set; }
-        public DateTime CreatedAt { get; set; }
-        public DateTime UpdatedAt { get; set; }
-        public int SuccessfulSwaps { get; set; }
+        public DateTime? CreatedAt { get; set; }
+        public DateTime? UpdatedAt { get; set; }
+        public int? SuccessfulSwaps { get; set; }
         
     }
 }
