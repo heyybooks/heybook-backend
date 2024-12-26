@@ -7,7 +7,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace UserManagement.DataAccess.Migrations
 {
     /// <inheritdoc />
-    public partial class CreateUserTable : Migration
+    public partial class UpdateUsertablo : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -27,15 +27,16 @@ namespace UserManagement.DataAccess.Migrations
                     PhoneNumber = table.Column<string>(type: "text", nullable: false),
                     Address = table.Column<string>(type: "text", nullable: false),
                     City = table.Column<string>(type: "text", nullable: false),
-                    ProfilePicture = table.Column<string>(type: "text", nullable: false),
-                    Bio = table.Column<string>(type: "text", nullable: false),
-                    Rating = table.Column<decimal>(type: "numeric", nullable: false),
-                    TotalSwaps = table.Column<int>(type: "integer", nullable: false),
-                    IsVerified = table.Column<bool>(type: "boolean", nullable: false),
-                    Status = table.Column<string>(type: "text", nullable: false),
+                    ProfilePicture = table.Column<string>(type: "text", nullable: true),
+                    Bio = table.Column<string>(type: "text", nullable: true),
+                    Rating = table.Column<decimal>(type: "numeric", nullable: true),
+                    TotalSwaps = table.Column<int>(type: "integer", nullable: true),
+                    IsVerified = table.Column<bool>(type: "boolean", nullable: true),
+                    Status = table.Column<string>(type: "text", nullable: true),
                     LastLoginDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
-                    CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    UpdatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
+                    CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
+                    UpdatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
+                    SuccessfulSwaps = table.Column<int>(type: "integer", nullable: true)
                 },
                 constraints: table =>
                 {

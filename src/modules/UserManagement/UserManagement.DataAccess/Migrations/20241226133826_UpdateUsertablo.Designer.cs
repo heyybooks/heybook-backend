@@ -12,8 +12,8 @@ using UserManagement.DataAccess.EntityFramework;
 namespace UserManagement.DataAccess.Migrations
 {
     [DbContext(typeof(UserDbContext))]
-    [Migration("20241216162429_CreateUserTable")]
-    partial class CreateUserTable
+    [Migration("20241226133826_UpdateUsertablo")]
+    partial class UpdateUsertablo
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -38,14 +38,13 @@ namespace UserManagement.DataAccess.Migrations
                         .HasColumnType("text");
 
                     b.Property<string>("Bio")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("City")
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<DateTime>("CreatedAt")
+                    b.Property<DateTime?>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("Email")
@@ -56,7 +55,7 @@ namespace UserManagement.DataAccess.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<bool>("IsVerified")
+                    b.Property<bool?>("IsVerified")
                         .HasColumnType("boolean");
 
                     b.Property<DateTime?>("LastLoginDate")
@@ -79,20 +78,21 @@ namespace UserManagement.DataAccess.Migrations
                         .HasColumnType("text");
 
                     b.Property<string>("ProfilePicture")
-                        .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<decimal>("Rating")
+                    b.Property<decimal?>("Rating")
                         .HasColumnType("numeric");
 
                     b.Property<string>("Status")
-                        .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<int>("TotalSwaps")
+                    b.Property<int?>("SuccessfulSwaps")
                         .HasColumnType("integer");
 
-                    b.Property<DateTime>("UpdatedAt")
+                    b.Property<int?>("TotalSwaps")
+                        .HasColumnType("integer");
+
+                    b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("Username")

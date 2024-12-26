@@ -7,6 +7,9 @@ using Core.Utilities.IoC;
 using Core.Extensions;
 using Swap.Business.DependencyResolvers;
 using Microsoft.OpenApi.Models;
+using UserManagement.Business.DependencyResolvers.Autofac;
+
+
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -16,7 +19,11 @@ builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory());
 builder.Host.ConfigureContainer<ContainerBuilder>(builder =>
 {
     builder.RegisterModule(new AutofacBusinessModule());
+    builder.RegisterModule(new AutofacUserManagementModule());
+  
+    
 });
+
 
 
 // Add services to the container.
@@ -32,6 +39,8 @@ builder.Services.AddSwaggerGen(c =>
 
 //swap extension
 builder.Services.AddSwapServices();
+
+
 
 
 builder.Services.AddControllers();

@@ -7,6 +7,7 @@ using UserManagement.Entity.Concrete;
 
 
 
+
 namespace UserManagement.DataAccess.EntityFramework
 {
     public class UserDbContext : DbContext

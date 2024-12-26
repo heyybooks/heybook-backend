@@ -7,7 +7,7 @@
       POSTGRES_PASSWORD: ${DB_PASSWORD}
       POSTGRES_DB: ${DB_NAME}
     ports:
-      - "${DB_PORT}:5432"
+      - "5433:5432"
     volumes:
       # Postgres data dizinini container'ın içinde yönetmek için:
       - postgres_data:/var/lib/postgresql/data

@@ -14,13 +14,21 @@ namespace Swap.Entity.Concrete
     {
         [Key] 
         public int RequestId { get; set; }
+
+        [Required]
         public int RequesterId { get; set; }
+
+        [Required]
         public int RequestedBookId { get; set; }
+
+        [Required]
         public int OfferedBookId { get; set; }
-        public SwapStatus Status { get; set; }
-        public DateTime CreatedAt { get; set; }
-        public DateTime UpdatedAt { get; set; }
+        public SwapStatus Status { get; set; } = SwapStatus.Pending;
+        public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
+        public DateTime UpdatedAt { get; set; } = DateTime.UtcNow;
         public DateTime? CompletedAt { get; set; }
+
+        [MaxLength(500)]
         public string Notes { get; set; }
 
         

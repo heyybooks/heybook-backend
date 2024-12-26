@@ -7,6 +7,7 @@ namespace Swap.Business.DTOs
 {
     public class CreateSwapRequestDto
     {
+        public int RequesterId { get; set; }
         public int RequestedBookId { get; set; }
         public int OfferedBookId { get; set; }
         public string Notes { get; set; }
