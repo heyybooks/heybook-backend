@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Books.DataAccess.Configurations
 {
-    public class BookImageConfiguration : EntityTypeConfigurationBase<BookImage>
+    public class BookImagesConfiguration : EntityTypeConfigurationBase<BookImage>
     {
         public override void Configure(EntityTypeBuilder<BookImage> builder)
         {

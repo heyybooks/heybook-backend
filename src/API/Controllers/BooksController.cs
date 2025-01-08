@@ -2,6 +2,7 @@
 using Books.Business.Constants;
 using Books.Entity.Concrete;
 using Books.Entity.DTOs;
+using Core.Utilities.Results.Abstract;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 
@@ -19,7 +20,6 @@ namespace API.Controllers
             _bookService = bookService;
         }
 
-
         [HttpPost]
         public IActionResult AddWithImages([FromBody] BookCreateDto bookCreateDto)
         {
@@ -27,22 +27,21 @@ namespace API.Controllers
                 return BadRequest(Messages.BookInvalid);
 
             var result = _bookService.AddWithImages(bookCreateDto);
-            return result.IsSuccess ? Ok(result) : BadRequest(result.Message);
+            return HandleResult(result);
         }
-
 
         [HttpGet]
         public IActionResult GetAll()
         {
             var result = _bookService.GetAll();
-            return result.IsSuccess ? Ok(result.Data) : NotFound(Messages.BookNotFound);
+            return HandleDataResult(result);
         }
 
         [HttpGet("{id}")]
         public IActionResult Get(int id)
         {
             var result = _bookService.GetById(id);
-            return result.IsSuccess ? Ok(result.Data) : NotFound(Messages.BookNotFound);
+            return HandleDataResult(result);
         }
 
         [HttpGet("GetByName")]
@@ -52,21 +51,21 @@ namespace API.Controllers
                 return BadRequest(Messages.BookInvalid);
 
             var result = _bookService.GetByName(name);
-            return result.IsSuccess ? Ok(result.Data) : NotFound(result.Message);
+            return HandleDataResult(result);
         }
 
         [HttpGet("category/{categoryId}")]
         public IActionResult GetAllByCategoryId(int categoryId)
         {
             var result = _bookService.GetAllByCategoryId(categoryId);
-            return result.IsSuccess ? Ok(result.Data) : NotFound(Messages.BookNotFound);
+            return HandleDataResult(result);
         }
 
         [HttpGet("city/{cityId}")]
         public IActionResult GetByCity(int cityId)
         {
             var result = _bookService.GetByCity(cityId);
-            return result.IsSuccess ? Ok(result.Data) : NotFound(Messages.BookNotFound);
+            return HandleDataResult(result);
         }
 
         [HttpPut("{id}")]
@@ -76,7 +75,7 @@ namespace API.Controllers
                 return BadRequest(Messages.BookInvalid);
 
             var result = _bookService.Update(book);
-            return result.IsSuccess ? Ok(Messages.BookUpdated) : NotFound(Messages.BookNotFound);
+            return HandleResult(result);
         }
 
         [HttpDelete("{id}")]
@@ -87,7 +86,21 @@ namespace API.Controllers
                 return NotFound(Messages.BookNotFound);
 
             var deleteResult = _bookService.Delete(bookResult.Data);
-            return deleteResult.IsSuccess ? Ok(Messages.BookDeleted) : BadRequest(deleteResult.Message);
+            return HandleResult(deleteResult);
+        }
+
+        private IActionResult HandleResult(Core.Utilities.Results.Abstract.IResult result)
+        {
+            if (result.IsSuccess)
+                return Ok(new { Message = result.Message });
+            return BadRequest(new { Message = result.Message });
+        }
+
+        private IActionResult HandleDataResult<T>(IDataResult<T> result)
+        {
+            if (result.IsSuccess)
+                return Ok(result.Data);
+            return NotFound(new { Message = result.Message });
         }
     }
 }
