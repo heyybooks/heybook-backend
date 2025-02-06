@@ -17,6 +17,11 @@ namespace Core.DataAccess.EntityFramework
         // senkron metotlar
         public void Add(TEntity entity)
         {
+            if (entity == null)
+            {
+                throw new ArgumentNullException(nameof(entity), "The entity cannot be null.");
+            }
+
             using (TContext context = new TContext())
             {
                 var addedEntity = context.Entry(entity);
@@ -24,6 +29,7 @@ namespace Core.DataAccess.EntityFramework
                 context.SaveChanges();
             }
         }
+
         public void Update(TEntity entity)
         {
             using (TContext context = new TContext())

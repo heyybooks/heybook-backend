@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Books.Entity.DTOs
 {
-    public class BookCreateDto : IDto
+    public class BookWithImagesDto : IDto
     {
         public string BookName { get; set; } // Kitap adı
         public string Author { get; set; } // Yazar adı
@@ -18,7 +18,6 @@ namespace Books.Entity.DTOs
         public int CityId { get; set; } // Şehir ID
         public string Condition { get; set; } // Kitabın durumu
         public int OwnerId { get; set; } // Kitap sahibinin kullanıcı ID'si
-        public DateTime CreatedDate { get; set; }
         public bool IsActive { get; set; } // İlan aktif mi?
         public List<string> ImageUrls { get; set; } // Görsellerin URL'leri
     }
