@@ -8,19 +8,19 @@ using Core.Mapping;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// **Autofac Service Provider Factory ekleme**
+//Autofac Service Provider Factory ekleme
 builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory());
 builder.Host.ConfigureContainer<ContainerBuilder>(builder =>
 {
-    builder.RegisterModule(new AutoMapperModule()); // **TÜM PROFİLLERİ TEK SEFERDE YÜKLE**
-    builder.RegisterModule(new AutofacBusinessModule()); // **Books Modülü**
-    builder.RegisterModule(new AutofacUserManagementModule()); // **User Modülü**
+    builder.RegisterModule(new AutoMapperModule()); // Tüm profillere erişim
+    builder.RegisterModule(new AutofacBusinessModule()); // Books Modülü
+    builder.RegisterModule(new AutofacUserManagementModule()); // User Modülü**
 });
 
-// **Swap Service Extension**
+// Swap Service Extension
 builder.Services.AddSwapServices();
 
-// **Controller, Swagger ve CORS ayarları**
+// Controller, Swagger ve CORS ayarları
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -37,7 +37,7 @@ builder.Services.AddCors(options =>
 
 var app = builder.Build();
 
-// **Middleware konfigürasyonu**
+// Middleware konfigürasyonu
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();

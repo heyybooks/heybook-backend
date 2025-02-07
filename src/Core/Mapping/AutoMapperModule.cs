@@ -1,7 +1,7 @@
 ﻿using Autofac;
 using AutoMapper;
 using System.Linq;
-//using System.Reflection;
+
 
 namespace Core.Mapping
 {
@@ -14,19 +14,19 @@ namespace Core.Mapping
                 var assemblies = AppDomain.CurrentDomain.GetAssemblies();
                 var config = new MapperConfiguration(cfg =>
                 {
-                    // **TÜM PROFİLLERİ OTOMATİK OLARAK YÜKLE** ✅
+                    // Tüm Assembly'lerde IAutoMapperConfigurator'ı implemente eden sınıfları bul
                     cfg.AddMaps(assemblies);
                 });
 
                 return config;
             }).AsSelf().SingleInstance();
 
-            // **AutoMapper Instance'ını Her Modülde Kullanılabilir Hale Getir**
+            //AutoMapper Instance'ını Her Modülde Kullanılabilir Hale Getir
             builder.Register(ctx =>
             {
                 var config = ctx.Resolve<MapperConfiguration>();
                 return config.CreateMapper();
-            }).As<IMapper>().SingleInstance(); // **Tek bir örnek oluştur!**
+            }).As<IMapper>().SingleInstance(); //Tek bir örnek oluştur
         }
     }
 }

@@ -91,7 +91,7 @@ namespace Books.Business.Concrete
 
         public IResult AddWithImages(BookWithImagesDto bookWithImagesDto)
         {
-            Console.WriteLine("BookManager icerisindeki AddWithImages icerisindeyim");
+         
             if (bookWithImagesDto == null)
             {
                 return new ErrorResult(Messages.BookInvalid);

@@ -14,16 +14,15 @@ namespace UserManagement.Business.DependencyResolvers.Autofac
     {
         protected override void Load(ContainerBuilder builder)
         {
-            // **BU KISIM GEREKSİZ OLDUĞU İÇİN ÇIKARILDI** ❌
-            // builder.RegisterModule(new AutoMapperModule(typeof(UserProfile).Assembly));
+           
 
-            // **Manager Bağımlılıkları**
+            //Manager Bağımlılıkları
             builder.RegisterType<UserManager>().As<IUserService>().SingleInstance();
 
-            // **Dal Bağımlılıkları**
+            //Dal Bağımlılıkları
             builder.RegisterType<EfUserDal>().As<IUserDal>().SingleInstance();
 
-            // **AOP Entegrasyonu**
+            //AOP Entegrasyonu
             var assembly = System.Reflection.Assembly.GetExecutingAssembly();
 
             builder.RegisterAssemblyTypes(assembly).AsImplementedInterfaces()

@@ -15,19 +15,18 @@ namespace Books.Business.DependencyResolvers.Autofac
     {
         protected override void Load(ContainerBuilder builder)
         {
-            // **BU KISIM GEREKSİZ OLDUĞU İÇİN ÇIKARILDI** ❌
-            // builder.RegisterModule(new AutoMapperModule(typeof(BookProfile).Assembly));
 
-            // **Manager Bağımlılıkları**
+
+            //Manager Bağımlılıkları
             builder.RegisterType<BookManager>().As<IBookService>().SingleInstance();
 
-            // **Dal Bağımlılıkları**
+            //Dal Bağımlılıkları
             builder.RegisterType<EfBookDal>().As<IBookDal>().SingleInstance();
             builder.RegisterType<EfBookImageDal>().As<IBookImageDal>().SingleInstance();
 
             builder.RegisterType<BookFactory>().AsSelf().SingleInstance();
 
-            // **AOP Entegrasyonu**
+            //AOP Entegrasyonu
             var assembly = System.Reflection.Assembly.GetExecutingAssembly();
 
             builder.RegisterAssemblyTypes(assembly).AsImplementedInterfaces()

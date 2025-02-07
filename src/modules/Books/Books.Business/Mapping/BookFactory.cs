@@ -13,22 +13,19 @@ namespace Books.Business.Mapping
 
         public BookFactory(IMapper mapper)
         {
-            Console.WriteLine("BookFactory olusturuldu");
+         
             _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper), Messages.MapperNotNull);
         }
 
         public IDataResult<Book> CreateBookFromDto(BookWithImagesDto bookWithImagesDto)
         {
-            if (_mapper == null)
-            {
-                throw new Exception("AutoMapper instance is NULL! AutoMapper dependency injection'ı eksik olabilir.");
-            }
+
             if (bookWithImagesDto == null)
             {
                 return new ErrorDataResult<Book>(Messages.BookCreateDtoNull);
             }
-            Console.WriteLine("BookFactory icerisindeki CreateBookFromDto calistirildi");
-            Book book = _mapper.Map<Book>(bookWithImagesDto);
+
+            var book = _mapper.Map<Book>(bookWithImagesDto);
             return new SuccessDataResult<Book>(book, Messages.BookCreateDtoCreated);
         }
 
