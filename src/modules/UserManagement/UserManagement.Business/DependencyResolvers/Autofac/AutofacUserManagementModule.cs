@@ -1,11 +1,10 @@
 using Autofac;
 using Autofac.Extras.DynamicProxy;
-using AutoMapper;
 using Castle.DynamicProxy;
 using Core.Utilities.Interceptors;
+//using System.Reflection;
 using UserManagement.Business.Abstract;
 using UserManagement.Business.Concrete;
-using UserManagement.Business.Mapping;
 using UserManagement.DataAccess.Abstract;
 using UserManagement.DataAccess.EntityFramework;
 
@@ -15,31 +14,23 @@ namespace UserManagement.Business.DependencyResolvers.Autofac
     {
         protected override void Load(ContainerBuilder builder)
         {
-            // AutoMapper Konfigürasyonu
-            builder.Register(context => new MapperConfiguration(cfg => 
-            {
-                cfg.AddProfile<UserProfile>();
-            })).AsSelf().SingleInstance();
+            // **BU KISIM GEREKSİZ OLDUĞU İÇİN ÇIKARILDI** ❌
+            // builder.RegisterModule(new AutoMapperModule(typeof(UserProfile).Assembly));
 
-            builder.Register(c => 
-            {
-                var context = c.Resolve<IComponentContext>();
-                var config = context.Resolve<MapperConfiguration>();
-                return config.CreateMapper();
-            }).As<IMapper>().InstancePerLifetimeScope();
+            // **Manager Bağımlılıkları**
+            builder.RegisterType<UserManager>().As<IUserService>().SingleInstance();
 
-            // Bağımlılıkları Kaydet
-            builder.RegisterType<UserManager>().As<IUserService>();
-            builder.RegisterType<EfUserDal>().As<IUserDal>();
+            // **Dal Bağımlılıkları**
+            builder.RegisterType<EfUserDal>().As<IUserDal>().SingleInstance();
 
-            // Assembly üzerinden otomatik kayıt
+            // **AOP Entegrasyonu**
             var assembly = System.Reflection.Assembly.GetExecutingAssembly();
 
             builder.RegisterAssemblyTypes(assembly).AsImplementedInterfaces()
                 .EnableInterfaceInterceptors(new ProxyGenerationOptions()
                 {
                     Selector = new AspectInterceptorSelector()
-                });
+                }).SingleInstance();
         }
     }
 }

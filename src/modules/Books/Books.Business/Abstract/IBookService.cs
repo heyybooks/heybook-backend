@@ -20,6 +20,6 @@ namespace Books.Business.Abstract
         IResult Add(Book book);
         IResult Delete(Book book);
         IResult Update(Book book);
-        IResult AddWithImages(BookCreateDto bookCreateDto);
+        IResult AddWithImages(BookWithImagesDto bookWithImagesDto);
     }
 }

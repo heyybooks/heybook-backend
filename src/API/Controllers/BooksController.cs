@@ -21,12 +21,12 @@ namespace API.Controllers
         }
 
         [HttpPost]
-        public IActionResult AddWithImages([FromBody] BookCreateDto bookCreateDto)
+        public IActionResult AddWithImages([FromBody] BookWithImagesDto bookWithImagesDto)
         {
-            if (bookCreateDto == null)
+            if (bookWithImagesDto == null)
                 return BadRequest(Messages.BookInvalid);
 
-            var result = _bookService.AddWithImages(bookCreateDto);
+            var result = _bookService.AddWithImages(bookWithImagesDto);
             return HandleResult(result);
         }
 

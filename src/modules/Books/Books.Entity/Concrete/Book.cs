@@ -17,7 +17,7 @@ namespace Books.Entity.Concrete
         // public int DistrictId { get; set; } // İlçe ID
         public string Condition { get; set; } // Kitabın durumu
         public int OwnerId { get; set; } // Kitap sahibinin kullanıcı ID'si
-        public DateTime CreatedDate { get; set; } // İlan oluşturma tarihi
+        public DateTime CreatedDate { get; set; } = DateTime.UtcNow; // İlan oluşturma tarihi
         public bool IsActive { get; set; } // İlan aktif mi?
 
         public virtual ICollection<BookImage> BookImages { get; set; }

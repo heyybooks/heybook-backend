@@ -1,6 +1,7 @@
-﻿using Books.Business.Abstract;
+﻿using AutoMapper;
+using Books.Business.Abstract;
 using Books.Business.Constants;
-using Books.Business.Helpers;
+using Books.Business.Mapping;
 using Books.DataAccess.Abstract;
 using Books.Entity.Concrete;
 using Books.Entity.DTOs;
@@ -14,11 +15,15 @@ namespace Books.Business.Concrete
     {
         private readonly IBookDal _bookDal;
         private readonly IBookImageDal _bookImageDal;
+        private readonly BookFactory _bookFactory;
+        private readonly IMapper _mapper;
 
-        public BookManager(IBookDal bookDal, IBookImageDal bookImageDal)
+        public BookManager(IBookDal bookDal, IBookImageDal bookImageDal, BookFactory bookFactory, IMapper mapper)
         {
             _bookDal = bookDal;
             _bookImageDal = bookImageDal;
+            _bookFactory = bookFactory;
+            _mapper = mapper;
         }
 
         public IResult Add(Book book)
@@ -84,21 +89,30 @@ namespace Books.Business.Concrete
             return CheckForNull(books, Messages.BookNotFound) ?? new SuccessDataResult<List<Book>>(books, Messages.BookListed);
         }
 
-        public IResult AddWithImages(BookCreateDto bookCreateDto)
+        public IResult AddWithImages(BookWithImagesDto bookWithImagesDto)
         {
-            if (bookCreateDto == null)
+            Console.WriteLine("BookManager icerisindeki AddWithImages icerisindeyim");
+            if (bookWithImagesDto == null)
             {
                 return new ErrorResult(Messages.BookInvalid);
             }
 
-            // DTO'dan Book Entity oluşturuluyor
-            var book = BookFactory.CreateBookFromDto(bookCreateDto);
+            var bookResult = _bookFactory.CreateBookFromDto(bookWithImagesDto);
+            if (!bookResult.IsSuccess)
+            {
+                return bookResult;
+            }
 
+            var book = bookResult.Data;
             _bookDal.Add(book);
 
-            // DTO'daki ImageUrls listesini işleyip veritabanına ekle
-            var bookImages = BookFactory.CreateBookImageFromDto(bookCreateDto, book);
-            foreach (var bookImage in bookImages)
+            var bookImagesResult = _bookFactory.CreateBookImagesFromDto(bookWithImagesDto, book);
+            if (!bookImagesResult.IsSuccess)
+            {
+                return bookImagesResult;
+            }
+
+            foreach (var bookImage in bookImagesResult.Data)
             {
                 _bookImageDal.Add(bookImage);
             }
