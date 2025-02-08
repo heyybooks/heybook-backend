@@ -26,13 +26,13 @@ namespace Books.Business.Concrete
             _mapper = mapper;
         }
 
-        public IResult Add(Book book)
+        public async Task<IResult> Add(Book book)
         {
-            _bookDal.Add(book);
+            await _bookDal.AddAsync(book);
             return new SuccessResult(Messages.BookAdded);
         }
 
-        public IResult Delete(Book book)
+        public async Task<IResult> Delete(Book book)
         {
             var result = CheckIfBookExists(book);
             if (!result.IsSuccess)
@@ -40,11 +40,11 @@ namespace Books.Business.Concrete
                 return new ErrorResult(result.Message);
             }
 
-            _bookDal.Delete(book);
+            await _bookDal.DeleteAsync(book);
             return new SuccessResult(Messages.BookDeleted);
         }
 
-        public IResult Update(Book book)
+        public async Task<IResult> Update(Book book)
         {
             var result = CheckIfBookExists(book);
             if (!result.IsSuccess)
@@ -52,46 +52,53 @@ namespace Books.Business.Concrete
                 return new ErrorResult(result.Message);
             }
 
-            _bookDal.Update(book);
+            await _bookDal.UpdateAsync(book);
             return new SuccessResult(Messages.BookUpdated);
         }
 
-        public IDataResult<List<Book>> GetAll()
+        public async Task<IDataResult<List<Book>>> GetAll()
         {
-            var books = _bookDal.GetAll();
+            var books = await _bookDal.GetAllAsync();
             return CheckForNull(books, Messages.BookNotFound) ?? new SuccessDataResult<List<Book>>(books, Messages.BookListed);
         }
 
-        public IDataResult<List<Book>> GetAllByCategoryId(int categoryId)
+        public async Task<IDataResult<List<Book>>> GetAllByCategoryId(int categoryId)
         {
-            var books = _bookDal.GetAll(b => b.CategoryId == categoryId);
+            var books = await _bookDal.GetAllAsync(b => b.CategoryId == categoryId);
             return CheckForNull(books, Messages.BookNotFound) ?? new SuccessDataResult<List<Book>>(books);
         }
 
-        public IDataResult<List<Book>> GetByCity(int cityId)
+        public async Task<IDataResult<List<Book>>> GetByCity(int cityId)
         {
-            var books = _bookDal.GetAll(b => b.CityId == cityId);
+            var books = await _bookDal.GetAllAsync(b => b.CityId == cityId);
             return CheckForNull(books, Messages.BookNotFound) ?? new SuccessDataResult<List<Book>>(books);
         }
 
-        public IDataResult<Book> GetById(int id)
+        public async Task<IDataResult<Book>> GetById(int id)
         {
-            var book = _bookDal.Get(b => b.BookId == id);
+            var book = await _bookDal.GetAsync(b => b.BookId == id);
             return CheckForNull(book, Messages.BookNotFound) ?? new SuccessDataResult<Book>(book, Messages.BookListed);
         }
 
-        public IDataResult<List<Book>> GetByName(string name)
+        public async Task<IDataResult<List<BookImage>>> GetImageByBookId(int id)
         {
-            var books = _bookDal.GetAll()
+            var images = await _bookImageDal.GetAllAsync(b => b.BookId == id);
+            return CheckForNull(images, Messages.BookNotFound) ?? new SuccessDataResult<List<BookImage>>(images);
+
+        }
+
+        public async Task<IDataResult<List<Book>>> GetByName(string name)
+        {
+            var books = (await _bookDal.GetAllAsync())
                 .Where(b => b.BookName.ToLower() == name.ToLower())
                 .ToList();
 
             return CheckForNull(books, Messages.BookNotFound) ?? new SuccessDataResult<List<Book>>(books, Messages.BookListed);
         }
 
-        public IResult AddWithImages(BookWithImagesDto bookWithImagesDto)
+        public async Task<IResult> AddWithImages(BookWithImagesDto bookWithImagesDto)
         {
-         
+
             if (bookWithImagesDto == null)
             {
                 return new ErrorResult(Messages.BookInvalid);
@@ -104,7 +111,7 @@ namespace Books.Business.Concrete
             }
 
             var book = bookResult.Data;
-            _bookDal.Add(book);
+            await _bookDal.AddAsync(book);
 
             var bookImagesResult = _bookFactory.CreateBookImagesFromDto(bookWithImagesDto, book);
             if (!bookImagesResult.IsSuccess)
@@ -114,7 +121,7 @@ namespace Books.Business.Concrete
 
             foreach (var bookImage in bookImagesResult.Data)
             {
-                _bookImageDal.Add(bookImage);
+                await _bookImageDal.AddAsync(bookImage);
             }
 
             return new SuccessResult(Messages.BookAdded);
@@ -132,7 +139,7 @@ namespace Books.Business.Concrete
 
         private IResult CheckIfBookExists(Book book)
         {
-            if (book == null || _bookDal.Get(b => b.BookId == book.BookId) == null)
+            if (book == null || _bookDal.GetAsync(b => b.BookId == book.BookId) == null)
             {
                 return new ErrorResult(Messages.BookNotFound);
             }

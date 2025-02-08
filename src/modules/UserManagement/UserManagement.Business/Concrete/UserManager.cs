@@ -79,11 +79,10 @@ namespace UserManagement.Business.Concrete
             _mapper.Map(userUpdateDto, userToUpdate);
             userToUpdate.UpdatedAt = DateTime.UtcNow; // Güncelleme tarihini ayarla
 
-            bool updateResult = await _userDal.UpdateAsync(userToUpdate);
+             await _userDal.UpdateAsync(userToUpdate);
 
-            return updateResult 
-                ? new SuccessResult("Kullanıcı bilgileri güncellendi") 
-                : new ErrorResult("Güncelleme işlemi başarısız");
+            return new SuccessResult("Kullanıcı bilgileri güncellendi");
+                
         }
 
         public async Task<IResult> DeleteUser(int userId)

@@ -18,7 +18,7 @@ namespace Swap.Business.Abstract
         Task<IDataResult<List<SwapRequest>>> GetAll();
         Task<IDataResult<SwapRequest>> GetById(int id);
         Task<IDataResult<List<SwapRequest>>> GetByRequesterId(int requesterId);
-        Task<IDataResult<List<SwapRequest>>> GetByStatus(SwapStatus status);
+        Task<IDataResult<SwapRequest>> GetByStatus(SwapStatus status);
         Task<IResult> CreateSwapRequest(SwapRequest swapRequest);
         Task<IResult> UpdateSwapStatus(int requestId, SwapStatus status);
         Task<IResult> AddRating(SwapRating rating);

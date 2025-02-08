@@ -31,7 +31,7 @@ namespace Swap.Business.Concrete
 
         public async Task<IDataResult<SwapRequest>> GetById(int id)
         {
-            var result = _swapDal.Get(s => s.RequestId == id);
+            var result = await _swapDal.GetAsync(s => s.RequestId == id);
             return result != null 
                 ? new SuccessDataResult<SwapRequest>(result)
                 : new ErrorDataResult<SwapRequest>("Swap request not found");
@@ -43,10 +43,10 @@ namespace Swap.Business.Concrete
             return new SuccessDataResult<List<SwapRequest>>(result);
         }
 
-        public async Task<IDataResult<List<SwapRequest>>> GetByStatus(SwapStatus status)
+        public async Task<IDataResult<SwapRequest>> GetByStatus(SwapStatus status)
         {
-            var result = _swapDal.GetAll(s => s.Status == status);
-            return new SuccessDataResult<List<SwapRequest>>(result);
+            var result = await _swapDal.GetAsync(s => s.Status == status);
+            return new SuccessDataResult<SwapRequest>(result);
         }
 
         public async Task<IResult> CreateSwapRequest(SwapRequest swapRequest)

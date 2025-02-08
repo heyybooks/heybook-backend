@@ -8,12 +8,12 @@ namespace Books.Business.Mapping
     {
         public BookProfile()
         {
-         
+
             // BookWithImagesDto -> Book
             CreateMap<BookWithImagesDto, Book>()
                 .ForMember(dest => dest.BookId, opt => opt.Ignore())
-                .ForMember(dest => dest.CreatedDate, opt => opt.MapFrom(_ => DateTime.UtcNow))
-                .ForMember(dest => dest.BookImages, opt => opt.Ignore());
+                .ForMember(dest => dest.CreatedDate, opt => opt.MapFrom(_ => DateTime.UtcNow));
+
 
 
             // BookWithImagesDto -> BookImage

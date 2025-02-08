@@ -10,8 +10,12 @@ namespace Books.DataAccess.Configurations
         public override void Configure(EntityTypeBuilder<BookImage> builder)
         {
             builder.HasKey(bi => bi.BookImageId);
-            builder.Property(bi => bi.ImageUrl).IsRequired(false);
+            builder.Property(bi => bi.ImageUrl).IsRequired();
             builder.Property(bi => bi.UploadedDate).HasDefaultValueSql("NOW()");
+            builder.HasOne<Book>()
+                .WithMany()
+                .HasForeignKey(bi => bi.BookId)
+                .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }
