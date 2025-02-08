@@ -2,9 +2,11 @@
 using Books.Business.Abstract;
 using Books.Business.Constants;
 using Books.Business.Mapping;
+using Books.Business.ValidationRules.FluentValidation;
 using Books.DataAccess.Abstract;
 using Books.Entity.Concrete;
 using Books.Entity.DTOs;
+using Core.Aspect.Autofac.Validation;
 using Core.Utilities.Results.Abstract;
 using Core.Utilities.Results.Concrete;
 using System.Collections;
@@ -26,10 +28,26 @@ namespace Books.Business.Concrete
             _mapper = mapper;
         }
 
+        
+        [ValidationAspect(typeof(BookValidator))]
         public async Task<IResult> Add(Book book)
         {
             await _bookDal.AddAsync(book);
             return new SuccessResult(Messages.BookAdded);
+        }
+
+        
+        [ValidationAspect(typeof(BookValidator))]
+        public async Task<IResult> Update(Book book)
+        {
+            var result = CheckIfBookExists(book);
+            if (!result.IsSuccess)
+            {
+                return new ErrorResult(result.Message);
+            }
+
+            await _bookDal.UpdateAsync(book);
+            return new SuccessResult(Messages.BookUpdated);
         }
 
         public async Task<IResult> Delete(Book book)
@@ -42,18 +60,6 @@ namespace Books.Business.Concrete
 
             await _bookDal.DeleteAsync(book);
             return new SuccessResult(Messages.BookDeleted);
-        }
-
-        public async Task<IResult> Update(Book book)
-        {
-            var result = CheckIfBookExists(book);
-            if (!result.IsSuccess)
-            {
-                return new ErrorResult(result.Message);
-            }
-
-            await _bookDal.UpdateAsync(book);
-            return new SuccessResult(Messages.BookUpdated);
         }
 
         public async Task<IDataResult<List<Book>>> GetAll()
@@ -84,7 +90,6 @@ namespace Books.Business.Concrete
         {
             var images = await _bookImageDal.GetAllAsync(b => b.BookId == id);
             return CheckForNull(images, Messages.BookNotFound) ?? new SuccessDataResult<List<BookImage>>(images);
-
         }
 
         public async Task<IDataResult<List<Book>>> GetByName(string name)
@@ -96,9 +101,10 @@ namespace Books.Business.Concrete
             return CheckForNull(books, Messages.BookNotFound) ?? new SuccessDataResult<List<Book>>(books, Messages.BookListed);
         }
 
+        
+        [ValidationAspect(typeof(BookWithImagesDtoValidator))]
         public async Task<IResult> AddWithImages(BookWithImagesDto bookWithImagesDto)
         {
-
             if (bookWithImagesDto == null)
             {
                 return new ErrorResult(Messages.BookInvalid);
@@ -110,8 +116,8 @@ namespace Books.Business.Concrete
                 return bookResult;
             }
 
-            var book = bookResult.Data;
-            await _bookDal.AddAsync(book);
+            Book book = bookResult.Data;
+            await Add(book);
 
             var bookImagesResult = _bookFactory.CreateBookImagesFromDto(bookWithImagesDto, book);
             if (!bookImagesResult.IsSuccess)
