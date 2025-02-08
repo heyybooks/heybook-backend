@@ -16,7 +16,6 @@ namespace Books.Business.DependencyResolvers.Autofac
         protected override void Load(ContainerBuilder builder)
         {
 
-
             //Manager Bağımlılıkları
             builder.RegisterType<BookManager>().As<IBookService>().SingleInstance();
 

@@ -42,7 +42,6 @@ namespace Books.Business.Mapping
                 BookId = book.BookId,
                 ImageUrl = imageUrl,
                 UploadedDate = DateTime.UtcNow,
-                Book = book
             }).ToList();
 
             return new SuccessDataResult<List<BookImage>>(bookImages, Messages.BookImagesCreated);

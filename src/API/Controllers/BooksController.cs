@@ -21,71 +21,77 @@ namespace API.Controllers
         }
 
         [HttpPost]
-        public IActionResult AddWithImages([FromBody] BookWithImagesDto bookWithImagesDto)
+        public async Task<IActionResult> AddWithImages([FromBody] BookWithImagesDto bookWithImagesDto)
         {
             if (bookWithImagesDto == null)
                 return BadRequest(Messages.BookInvalid);
 
-            var result = _bookService.AddWithImages(bookWithImagesDto);
+            var result = await _bookService.AddWithImages(bookWithImagesDto); // Remove await
             return HandleResult(result);
         }
 
         [HttpGet]
-        public IActionResult GetAll()
+        public async Task<IActionResult> GetAll()
         {
-            var result = _bookService.GetAll();
+            var result = await _bookService.GetAll();
             return HandleDataResult(result);
         }
 
         [HttpGet("{id}")]
-        public IActionResult Get(int id)
+        public async Task<IActionResult> Get(int id)
         {
-            var result = _bookService.GetById(id);
+            var result = await _bookService.GetById(id);
+            return HandleDataResult(result);
+        }
+        [HttpGet("GetImageByBookId")]
+        public async Task<IActionResult> GetImageByBookId(int bookId)
+        {
+            var result = await _bookService.GetImageByBookId(bookId);
             return HandleDataResult(result);
         }
 
         [HttpGet("GetByName")]
-        public IActionResult GetByName([FromQuery] string name)
+        public async Task<IActionResult> GetByName([FromQuery] string name)
         {
             if (string.IsNullOrEmpty(name))
                 return BadRequest(Messages.BookInvalid);
 
-            var result = _bookService.GetByName(name);
+            var result = await _bookService.GetByName(name);
             return HandleDataResult(result);
         }
 
         [HttpGet("category/{categoryId}")]
-        public IActionResult GetAllByCategoryId(int categoryId)
+        public async Task<IActionResult> GetAllByCategoryId(int categoryId)
         {
-            var result = _bookService.GetAllByCategoryId(categoryId);
+            var result = await _bookService.GetAllByCategoryId(categoryId);
             return HandleDataResult(result);
         }
 
         [HttpGet("city/{cityId}")]
-        public IActionResult GetByCity(int cityId)
+        public async Task<IActionResult> GetByCity(int cityId)
         {
-            var result = _bookService.GetByCity(cityId);
+            var result = await _bookService.GetByCity(cityId);
             return HandleDataResult(result);
         }
 
         [HttpPut("{id}")]
-        public IActionResult Update(int id, [FromBody] Book book)
+        public async Task<IActionResult> Update(int id, [FromBody] Book book)
         {
             if (book == null || id != book.BookId)
                 return BadRequest(Messages.BookInvalid);
 
-            var result = _bookService.Update(book);
+            var result = await _bookService.Update(book);
             return HandleResult(result);
         }
 
         [HttpDelete("{id}")]
-        public IActionResult Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
-            var bookResult = _bookService.GetById(id);
+            var bookResult = await _bookService.GetById(id);
             if (!bookResult.IsSuccess)
                 return NotFound(Messages.BookNotFound);
 
-            var deleteResult = _bookService.Delete(bookResult.Data);
+            var deleteResult = await _bookService.Delete(bookResult.Data);
             return HandleResult(deleteResult);
         }
 

@@ -31,31 +31,31 @@ namespace UserManagement.DataAccess.EntityFramework
             }
         }
 
-        public async Task<bool> UpdateAsync(User entity)
-        {
-            using (var context = new UserDbContext())
-            {
-                var existingEntity = await context.Users.FindAsync(entity.UserId);
-
-                if (existingEntity == null)
-                    return false;
-
-                // Tüm alanları güncelle
-                context.Entry(existingEntity).CurrentValues.SetValues(entity);
-                existingEntity.UpdatedAt = DateTime.UtcNow;
-
-                try 
-                {
-                    int result = await context.SaveChangesAsync();
-                    return result > 0; // Güncelleme başarılıysa true döner
-                }
-                catch (Exception ex)
-                {
-                    // Hata loglaması yapılabilir
-                    Console.WriteLine($"Güncelleme hatası: {ex.Message}");
-                    return false;
-                }
-            }
-        }
+       // public async Task<bool> UpdateAsync(User entity)
+       // {
+       //     using (var context = new UserDbContext())
+       //     {
+       //         var existingEntity = await context.Users.FindAsync//(entity.UserId);
+       //
+       //         if (existingEntity == null)
+       //             return false;
+       //
+       //         // Tüm alanları güncelle
+       //         context.Entry(existingEntity).CurrentValues.SetValues(entity);
+       //         existingEntity.UpdatedAt = DateTime.UtcNow;
+       //
+       //         try 
+       //         {
+       //             int result = await context.SaveChangesAsync();
+       //             return result > 0; // Güncelleme başarılıysa true döner
+       //         }
+       //         catch (Exception ex)
+       //         {
+       //             // Hata loglaması yapılabilir
+       //             Console.WriteLine($"Güncelleme hatası: {ex.Message}");
+       //             return false;
+       //         }
+       //     }
+       // }
     }
 }

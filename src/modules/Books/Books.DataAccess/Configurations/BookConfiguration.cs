@@ -11,10 +11,7 @@ namespace Books.DataAccess.Configurations
         {
             builder.HasKey(b => b.BookId);
             builder.Property(b => b.BookName).IsRequired().HasMaxLength(200);
-            builder.HasMany(b => b.BookImages)
-                   .WithOne(bi => bi.Book)
-                   .HasForeignKey(bi => bi.BookId);
-                   
+
 
             // Ortak yapılandırma:
             ConfigureBaseProperties(builder);

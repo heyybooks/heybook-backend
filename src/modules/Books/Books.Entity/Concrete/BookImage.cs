@@ -9,8 +9,7 @@ namespace Books.Entity.Concrete
         public int BookId { get; set; } // İlgili kitap ID
         public string? ImageUrl { get; set; } = string.Empty;// Fotoğrafın URL'si
         public DateTime UploadedDate { get; set; } = DateTime.UtcNow;
-        // Yükleme tarihi
-        public virtual Book? Book { get; set; }
+
     }
 }
 

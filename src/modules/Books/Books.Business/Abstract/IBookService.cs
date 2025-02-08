@@ -11,15 +11,16 @@ namespace Books.Business.Abstract
 {
     public interface IBookService
     {
-        IDataResult<List<Book>> GetAll();
-        IDataResult<Book> GetById(int id);
-        IDataResult<List<Book>> GetByName(string name);
-        IDataResult<List<Book>> GetByCity(int CityId);
-        IDataResult<List<Book>> GetAllByCategoryId(int CategoryId);
+        Task<IDataResult<List<Book>>> GetAll();
+        Task<IDataResult<Book>> GetById(int id);
+        Task<IDataResult<List<Book>>> GetByName(string name);
+        Task<IDataResult<List<Book>>> GetByCity(int CityId);
+        Task<IDataResult<List<Book>>> GetAllByCategoryId(int CategoryId);
+        Task<IDataResult<List<BookImage>>> GetImageByBookId(int id);
 
-        IResult Add(Book book);
-        IResult Delete(Book book);
-        IResult Update(Book book);
-        IResult AddWithImages(BookWithImagesDto bookWithImagesDto);
+        Task<IResult> Add(Book book);
+        Task<IResult> Delete(Book book);
+        Task<IResult> Update(Book book);
+        Task<IResult>AddWithImages(BookWithImagesDto bookWithImagesDto);
     }
 }
