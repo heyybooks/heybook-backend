@@ -3,8 +3,11 @@ using Autofac.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
 using Books.Business.DependencyResolvers.Autofac;
 using Swap.Business.DependencyResolvers;
+using Swap.DataAccess;
+using Microsoft.OpenApi.Models;
 using UserManagement.Business.DependencyResolvers.Autofac;
 using Core.Mapping;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -19,6 +22,7 @@ builder.Host.ConfigureContainer<ContainerBuilder>(builder =>
 
 // Swap Service Extension
 builder.Services.AddSwapServices();
+
 
 // Controller, Swagger ve CORS ayarları
 builder.Services.AddControllers();

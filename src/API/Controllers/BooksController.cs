@@ -6,6 +6,7 @@ using Core.Utilities.Results.Abstract;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 
+
 namespace API.Controllers
 {
     [Route("api/[controller]")]
@@ -14,10 +15,13 @@ namespace API.Controllers
     public class BooksController : ControllerBase
     {
         private readonly IBookService _bookService;
+    
 
         public BooksController(IBookService bookService)
         {
             _bookService = bookService;
+            
+            
         }
 
         [HttpPost]
@@ -108,5 +112,7 @@ namespace API.Controllers
                 return Ok(result.Data);
             return NotFound(new { Message = result.Message });
         }
+        
+        
     }
 }
