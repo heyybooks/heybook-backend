@@ -6,4 +6,13 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="13.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\UserManagement.Entity\UserManagement.Entity.csproj" />
+    <ProjectReference Include="..\UserManagement.DataAccess\UserManagement.DataAccess.csproj" />
+  </ItemGroup>
+
 </Project>

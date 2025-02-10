@@ -7,7 +7,7 @@ using Core.Entities;
 
 namespace Swap.DataAccess.Abstract
 {
-    public interface ISwapRatingDal : IEntityReposity<SwapRating>
+    public interface ISwapRatingDal : IEntityRepository<SwapRating>
     {
         Task<List<SwapRating>> GetUserRatingsWithDetailsAsync(int userId);
     }

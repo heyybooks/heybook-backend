@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Swap.DataAccess.Abstract
 {
-    public interface ISwapDal : IEntityReposity<SwapRequest> 
+    public interface ISwapDal : IEntityRepository<SwapRequest> 
     {
         Task<List<SwapRequest>> GetUserSwaps(int userId);
 }

@@ -2,15 +2,12 @@
 using Autofac.Extras.DynamicProxy;
 using Books.Business.Abstract;
 using Books.Business.Concrete;
+using Books.Business.Mapping;
 using Books.DataAccess.Abstract;
 using Books.DataAccess.EntityFramework;
 using Castle.DynamicProxy;
 using Core.Utilities.Interceptors;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+//using System.Reflection;
 
 namespace Books.Business.DependencyResolvers.Autofac
 {
@@ -18,16 +15,24 @@ namespace Books.Business.DependencyResolvers.Autofac
     {
         protected override void Load(ContainerBuilder builder)
         {
-            builder.RegisterType<BookManager>().As<IBookService>().SingleInstance();
-            builder.RegisterType<EfBookDal>().As<IBookDal>().SingleInstance();
 
+            //Manager Bağımlılıkları
+            builder.RegisterType<BookManager>().As<IBookService>().SingleInstance();
+
+            //Dal Bağımlılıkları
+            builder.RegisterType<EfBookDal>().As<IBookDal>().SingleInstance();
+            builder.RegisterType<EfBookImageDal>().As<IBookImageDal>().SingleInstance();
+
+            builder.RegisterType<BookFactory>().AsSelf().SingleInstance();
+
+            //AOP Entegrasyonu
             var assembly = System.Reflection.Assembly.GetExecutingAssembly();
 
             builder.RegisterAssemblyTypes(assembly).AsImplementedInterfaces()
-             .EnableInterfaceInterceptors(new ProxyGenerationOptions()
-             {
-                 Selector = new AspectInterceptorSelector()
-             }).SingleInstance();
+                .EnableInterfaceInterceptors(new ProxyGenerationOptions()
+                {
+                    Selector = new AspectInterceptorSelector()
+                }).SingleInstance();
         }
     }
 }

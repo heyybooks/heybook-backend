@@ -85,7 +85,6 @@ namespace Swap.DataAccess.Migrations
                         .HasColumnType("integer");
 
                     b.Property<string>("ImageUrl")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<DateTime>("UploadedDate")
@@ -152,7 +151,8 @@ namespace Swap.DataAccess.Migrations
 
                     b.Property<string>("Notes")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasMaxLength(500)
+                        .HasColumnType("character varying(500)");
 
                     b.Property<int>("OfferedBookId")
                         .HasColumnType("integer");
@@ -193,14 +193,13 @@ namespace Swap.DataAccess.Migrations
                         .HasColumnType("text");
 
                     b.Property<string>("Bio")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("City")
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<DateTime>("CreatedAt")
+                    b.Property<DateTime?>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("Email")
@@ -211,7 +210,7 @@ namespace Swap.DataAccess.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<bool>("IsVerified")
+                    b.Property<bool?>("IsVerified")
                         .HasColumnType("boolean");
 
                     b.Property<DateTime?>("LastLoginDate")
@@ -234,23 +233,21 @@ namespace Swap.DataAccess.Migrations
                         .HasColumnType("text");
 
                     b.Property<string>("ProfilePicture")
-                        .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<decimal>("Rating")
+                    b.Property<decimal?>("Rating")
                         .HasColumnType("numeric");
 
                     b.Property<string>("Status")
-                        .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<int>("SuccessfulSwaps")
+                    b.Property<int?>("SuccessfulSwaps")
                         .HasColumnType("integer");
 
-                    b.Property<int>("TotalSwaps")
+                    b.Property<int?>("TotalSwaps")
                         .HasColumnType("integer");
 
-                    b.Property<DateTime>("UpdatedAt")
+                    b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("Username")
