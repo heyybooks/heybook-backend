@@ -1,61 +1,100 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using  UserManagement.DataAccess;
 using UserManagement.Business.Abstract;
-using UserManagement.Business.DTOs;
-using UserManagement.Entity.Concrete;
-
+using Core.Utilities.Results.Abstract;
+using UserManagement.Entity.DTOs;
 
 namespace API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class UserController : ControllerBase
+    public class UsersController : ControllerBase
     {
         private readonly IUserService _userService;
 
-        public UserController(IUserService userService)
+        public UsersController(IUserService userService)
         {
             _userService = userService;
         }
 
-        [HttpGet]
+
+        [HttpPost("register")]
+        public async Task<IActionResult> Register([FromBody] UserRegisterDto userRegisterDto)
+        {
+            if (userRegisterDto == null)
+                return BadRequest("User register data is required.");
+
+            var result = await _userService.Register(userRegisterDto, userRegisterDto.Password);
+            return HandleResult(result);
+        }
+
+
+        [HttpPost("login")]
+        public async Task<IActionResult> Login([FromBody] UserLoginDto userLoginDto)
+        {
+            if (userLoginDto == null)
+                return BadRequest("User login data is required.");
+
+            var result = await _userService.Login(userLoginDto);
+            return HandleResult(result);
+        }
+
+        [HttpGet("getall")]
         public async Task<IActionResult> GetAllUsers()
         {
             var result = await _userService.GetAllUsers();
-            return result.IsSuccess ? Ok(result.Data) : BadRequest(result.Message);
+            return HandleDataResult(result);
         }
 
-        [HttpGet("{id}")]
-        public async Task<IActionResult> GetUserById(int id)
+
+        [HttpPut("{userId}")]
+        public async Task<IActionResult> UpdateUser(int userId, [FromBody] UserUpdateDto userUpdateDto)
         {
-            var result = await _userService.GetUserById(id);
-            return result.IsSuccess ? Ok(result.Data) : NotFound(result.Message);
+            if (userUpdateDto == null)
+                return BadRequest("User update data is required.");
+
+            var result = await _userService.UpdateUser(userId, userUpdateDto);
+            return HandleResult(result);
         }
 
-        [HttpPost]
-        public async Task<IActionResult> CreateUser([FromBody] UserCreateDto userCreateDto)
+        [HttpPut("change-password/{userId}")]
+        public async Task<IActionResult> ChangePassword(int userId, [FromBody] UserChangePasswordDto passwordDto)
         {
-            var result = await _userService.CreateUser(userCreateDto);
-            return result.IsSuccess ? Ok(result.Message) : BadRequest(result.Message);
+            if (passwordDto == null)
+                return BadRequest("Password change data is required.");
+
+            var result = await _userService.ChangePassword(userId, passwordDto);
+            return HandleResult(result);
         }
 
-        [HttpPut]
-        public async Task<IActionResult> UpdateUser([FromBody] UserUpdateDto userUpdateDto)
+
+        [HttpGet("{userId}")]
+        public async Task<IActionResult> GetUserById(int userId)
         {
-            var result = await _userService.UpdateUser(userUpdateDto);
-            return result.IsSuccess ? Ok(result.Message) : BadRequest(result.Message);
+            var result = await _userService.GetUserById(userId);
+            return HandleDataResult(result);
         }
 
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteUser(int id)
+
+        [HttpDelete("{userId}")]
+        public async Task<IActionResult> DeleteUser(int userId)
         {
-            var result = await _userService.DeleteUser(id);
-            return result.IsSuccess ? Ok(result.Message) : BadRequest(result.Message);
+            var result = await _userService.DeleteUser(userId);
+            return HandleResult(result);
+        }
+
+
+        private IActionResult HandleResult(Core.Utilities.Results.Abstract.IResult result)
+        {
+            if (result.IsSuccess)
+                return Ok(new { Message = result.Message });
+            return BadRequest(new { Message = result.Message });
+        }
+
+        private IActionResult HandleDataResult<T>(IDataResult<T> result)
+        {
+            if (result.IsSuccess)
+                return Ok(result.Data);
+            return NotFound(new { Message = result.Message });
         }
     }
-
 }

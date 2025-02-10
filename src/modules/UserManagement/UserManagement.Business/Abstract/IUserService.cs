@@ -1,17 +1,16 @@
 using Core.Utilities.Results.Abstract;
-using UserManagement.Business.DTOs;
+using UserManagement.Entity.DTOs;
 
 namespace UserManagement.Business.Abstract
 {
     public interface IUserService
     {
+        Task<IResult> Register(UserRegisterDto userRegisterDto, string password);
+        Task<IDataResult<string>> Login(UserLoginDto userLoginDto);
         Task<IDataResult<List<UserDto>>> GetAllUsers();
         Task<IDataResult<UserDto>> GetUserById(int userId);
-        Task<IDataResult<UserDto>> GetUserByEmail(string email);
-        Task<IResult> CreateUser(UserCreateDto userCreateDto);
-        Task<IResult> UpdateUser(UserUpdateDto userUpdateDto);
+        Task<IResult> UpdateUser(int userId, UserUpdateDto userUpdateDto);
         Task<IResult> DeleteUser(int userId);
-        Task<IDataResult<UserDto>> Login(string email, string password);
-        Task<bool> UserExists(string email);
+        Task<IResult> ChangePassword(int userId, UserChangePasswordDto passwordDto);
     }
 }
