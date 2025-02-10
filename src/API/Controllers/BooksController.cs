@@ -3,6 +3,7 @@ using Books.Business.Constants;
 using Books.Entity.Concrete;
 using Microsoft.AspNetCore.Mvc;
 
+
 namespace API.Controllers
 {
     [Route("api/[controller]")]
@@ -10,10 +11,13 @@ namespace API.Controllers
     public class BooksController : ControllerBase
     {
         private readonly IBookService _bookService;
+    
 
         public BooksController(IBookService bookService)
         {
             _bookService = bookService;
+            
+            
         }
 
         [HttpPost]
@@ -84,5 +88,7 @@ namespace API.Controllers
             var deleteResult = _bookService.Delete(bookResult.Data);
             return deleteResult.IsSuccess ? Ok(Messages.BookDeleted) : BadRequest(deleteResult.Message);
         }
+        
+        
     }
 }

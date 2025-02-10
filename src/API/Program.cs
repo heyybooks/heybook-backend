@@ -6,6 +6,7 @@ using Core.DependencyResolvers;
 using Core.Utilities.IoC;
 using Core.Extensions;
 using Swap.Business.DependencyResolvers;
+using Swap.DataAccess;
 using Microsoft.OpenApi.Models;
 
 
@@ -32,7 +33,7 @@ builder.Services.AddSwaggerGen(c =>
 //swap extension
 builder.Services.AddSwapServices();
 
-
+//services.AddScoped<IBookFilterService, BookFilterService>();
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
